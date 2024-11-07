@@ -1,0 +1,6 @@
+:root {
+}
+
+:root[dark-mode] {
+	background-color: black;
+}
