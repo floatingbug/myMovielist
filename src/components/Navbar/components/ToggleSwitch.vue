@@ -1,24 +1,33 @@
 <script setup>
 import {ref, onMounted} from "vue";
 import ToggleSwitch from 'primevue/toggleswitch';
+import {useUser} from "@/store/useUser.js";
 
 
 const checked = ref(false);
-
-
-const emit = defineEmits();
-const props = defineProps({
-	isDarkMode: Boolean
-});
+const {setUserSettings, getUserSettings} = useUser();
+const userSettings = getUserSettings();
 
 
 onMounted(() => {
-	checked.value = props.isDarkMode;
+	if(localStorage.getItem("isDarkMode") === "true" || localStorage.getItem("isDarkMode") === true){
+		document.documentElement.className = "dark-mode";
+		checked.value = true;
+	}
 });
 
 
 function handleToggleSwitch(e){
-	emit("toggleSwitch", e);
+	if(e){
+		document.documentElement.className = "dark-mode";
+		localStorage.setItem("isDarkMode", true);
+		setUserSettings({isDarkMode: true});
+	}
+	else{
+		document.documentElement.className = "";
+		localStorage.setItem("isDarkMode", false);
+		setUserSettings({isDarkMode: false});
+	}
 }
 </script>
 

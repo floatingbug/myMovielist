@@ -3,7 +3,7 @@ import {ref} from "vue";
 import ToggleSwitch from "./components/ToggleSwitch.vue";
 
 
-const isNavbarActive = ref(false);
+const isNavbarActive = ref(true);
 
 </script>
 
@@ -16,12 +16,17 @@ const isNavbarActive = ref(false);
 			</header>
 
 			<main>
+				<div class="main-content">
+					<Button as="router-link" to="/find-movies" label="Find movies" @click="isNavbarActive = false"></Button>
+				
+					<Button label="Movie lists"></Button>
+					
+					<Button label="Edit lists"></Button>
+				</div>
 			</main>
 
 			<footer>
 				<div class="top">
-					<Button as="router-link" to="sign-in" label="Sign in" severity="contrast" variant="outlined" raised @click="isNavbarActive = false"></Button>
-					<Button as="router-link" to="sign-up" label="Sign up" severity="secondary"  variant="outlined" raised @click="isNavbarActive = false"></Button>
 				</div>
 				
 				<div class="bottom">
@@ -72,11 +77,28 @@ header {
 }
 
 main {
-	height: 40%;
+	width: 100%;
+	min-width: 280px;
+	height: 60%;
+	display: flex;
+	justify-content: center;
+}
+
+.main-content {
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.main-content .p-button {
+	width: 100%;
+	text-decoration: none;
 }
 
 footer {
-	height: 40%;
+	height: 20%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;

@@ -11,15 +11,16 @@ import ToggleSwitch from "./components/ToggleSwitch.vue";
 				<span>myMovielist</span>
 			</div>
 
-			<div class="mid"></div>
+			<div class="mid">
+				<Button as="router-link" to="/find-movies" label="Find movies" variant="text" severity="contrast" @click="isNavbarActive = false"></Button>
+			
+				<Button label="Movie lists" variant="text" severity="contrast" @click="isNavbarActive = false"></Button>
+				
+				<Button label="Edit lists" variant="text" severity="contrast" @click="isNavbarActive = false"></Button>
+			</div>
 
 			<div class="right">
 				<ToggleSwitch />
-
-				<div class="sign-buttons">
-					<Button as="router-link" to="sign-in" label="Sign in" variant="outlined" raised />
-					<Button as="router-link" to="sign-up" label="Sign up" variant="text" />
-				</div>
 			</div>
 		</div>
 	</div>
@@ -47,6 +48,10 @@ import ToggleSwitch from "./components/ToggleSwitch.vue";
 	font-size: 1.4rem;
 	font-weight: 1.4rem;
 	color: var(--p-primary-contrast-color);
+}
+
+.mid .p-button {
+	text-decoration: none;
 }
 
 .right {

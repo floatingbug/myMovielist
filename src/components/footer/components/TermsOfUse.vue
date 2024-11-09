@@ -67,6 +67,6 @@
 }
 
 .content h1 {
- 	margin-bottom: 5dvh;
+ 	margin: 5dvh 0;
 }
 </style>

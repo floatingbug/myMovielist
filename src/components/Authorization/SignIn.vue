@@ -47,7 +47,7 @@ async function signIn(){
 	localStorage.setItem("token", data.value.token);
 	localStorage.setItem("isSignedIn", true);
 
-	router.push("/dashboard");
+	router.push("/find-movies");
 }
 </script>
 
