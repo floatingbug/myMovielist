@@ -6,7 +6,7 @@ The following sitemap shows the structure of the **myMovielist** website and its
   - **Sign up** (`/sign-up`)
   - **Sign in** (`/sign-in`)
   - **User Profile** (`/profile`)
-    - **View and Edit Profile**
+    - **View and Edit Profile** (`/profile/edit`)
     - **My Lists** (`/my-lists`)
     - **Logout** (Logout action)
   - **Public Lists** (`/public-lists`)
