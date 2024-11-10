@@ -16,7 +16,7 @@ The following sitemap shows the structure of the **myMovielist** website and its
     - Search for movies and rate them
   - **About myMovielist** (`/about`)
 
-
+---
 
 
 This template should help get you started developing with Vue 3 in Vite.
