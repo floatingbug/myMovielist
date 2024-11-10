@@ -3,8 +3,8 @@
 The following sitemap shows the structure of the **myMovielist** website and its pages:
 
 - **Home** (`/`)
-  - **Register** (`/register`)
-  - **Login** (`/login`)
+  - **Sign up** (`/sign-up`)
+  - **Sign in** (`/sign-in`)
   - **User Profile** (`/profile`)
     - **View and Edit Profile**
     - **My Lists** (`/my-lists`)
