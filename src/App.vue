@@ -2,10 +2,7 @@
 import {onMounted} from "vue";
 import { RouterLink, RouterView } from 'vue-router'
 import useDeviceSize from "./composables/useDeviceSize.js";
-import TheNavbarLd from "@/components/Navbar/TheNavbarLd.vue";
-import TheNavbarSd from "@/components/Navbar/TheNavbarSd.vue";
-import TheNavbarSignedInLd from "@/components/Navbar/TheNavbarSignedInLd.vue";
-import TheNavbarSignedInSd from "@/components/Navbar/TheNavbarSignedInSd.vue";
+import TheNavbar from "./components/Navbar/TheNavbar.vue";
 import TheFooter from "@/components/footer/TheFooter.vue";
 import {useUser} from "./store/useUser.js";
 
@@ -41,13 +38,7 @@ onMounted(() => {
 </script>
 
 <template>
-	<TheNavbarLd v-if="device === 'ld' && !userSettings.isSignedIn" />
-
-	<TheNavbarSd v-if="device === 'sd' && !userSettings.isSignedIn" />
-	
-	<TheNavbarSignedInLd v-if="device === 'ld'" />
-
-	<TheNavbarSignedInSd v-if="device === 'sd'" />
+	<TheNavbar />
 
 	<main>
 		<RouterView />

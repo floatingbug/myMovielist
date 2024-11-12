@@ -1,7 +1,7 @@
 :root {
-	--navbar-bg-sd: rgb(from var(--p-surface-200) r g b / 10%);
+	--navbar-bg-sd: rgb(from var(--p-surface-200) r g b / 50%);
 }
 
 .dark-mode {
-	--navbar-bg-sd: rgb(from var(--p-surface-500) r g b / 10%);
+	--navbar-bg-sd: rgb(from var(--p-surface-900) r g b / 50%);
 }

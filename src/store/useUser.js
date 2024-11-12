@@ -13,10 +13,9 @@ const userSettings = reactive({
 
 
 export function useUser(){
-	function setUser({name, email, isSignedIn}){
+	function setUser({name, email}){
 		user.name = name;
 		user.email = email;
-		user.isSignedIn = isSignedIn;
 	}
 
 	function getUser(){

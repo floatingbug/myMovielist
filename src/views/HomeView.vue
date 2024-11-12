@@ -2,5 +2,4 @@
 </script>
 
 <template>
-	<Button label="button" />
 </template>
