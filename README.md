@@ -1,4 +1,23 @@
-# ./
+# Sitemap for myMovielist
+
+The following sitemap shows the structure of the **myMovielist** website and its pages:
+
+- **Home** (`/`)
+  - **Sign up** (`/sign-up`)
+  - **Sign in** (`/sign-in`)
+  - **User Profile** (`/profile`)
+    - **View and Edit Profile** (`/profile/edit`)
+    - **My Lists** (`/my-lists`)
+    - **Logout** (Logout action)
+  - **Public Lists** (`/public-lists`)
+    - All public lists
+    - Top Ten Lists
+  - **Movie Search** (`/search`)
+    - Search for movies and rate them
+  - **About myMovielist** (`/about`)
+
+---
+
 
 This template should help get you started developing with Vue 3 in Vite.
 
