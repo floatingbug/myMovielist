@@ -1,27 +1,57 @@
 <script setup>
-import { ref } from "vue";
-import Menu from 'primevue/menu';
+import {ref, computed, onMounted} from "vue";
+import {useRouter} from "vue-router";
+import TieredMenu from 'primevue/tieredmenu';
+import {useUser} from "@/store/useUser.js";
+import {addToMovielist} from "../helpers/addToMovielist.js";
+import {useToast} from "primevue/usetoast";
 
 
+const props = defineProps({
+	movie: Object
+});
+
+
+const toast = useToast();
+const {getUser} = useUser();
+const user = getUser();
+const router = useRouter();
 const menu = ref();
+const movielists = user.movielists?.map(list => ({
+	label: list.name,
+	command: async () => {
+		const data = await addToMovielist({movie: props.movie, movielist: list});
+		if(data.value.success) toast.add({ severity: 'contrast', summary: 'Movie Added', detail: data.value.msg, life: 3000 });
+		else toast.add({ severity: 'contrast', summary: 'Movie not added', detail: data.value.msg, life: 3000 });
+	}
+})) || [];
 const items = ref([
-    {
-        label: 'Options',
-        items: [
-            {
-                label: 'Add to list',
-                icon: 'pi pi-list'
-            },
-            {
-                label: 'Add to watchlist',
-                icon: 'pi pi-bookmark-fill'
-            },
-            {
-                label: 'Add ranking',
-                icon: 'pi pi-star-fill'
-            },
-        ]
-    }
+	{
+		label: 'Lists',
+		icon: 'pi pi-list',
+		items: [
+			{
+				label: "Create new list",
+				command: () => {
+					router.push("/add-movie-list");
+				}
+			},
+			{
+				label: "Add to your lists",
+				items: [
+					...movielists
+				]
+			}
+		]
+	},
+	{
+		label: 'Add to watchlist',
+		icon: 'pi pi-bookmark-fill'
+	},
+	{
+		label: 'Add rating',
+		icon: 'pi pi-star-fill'
+	},
 ]);
 
 const toggle = (event) => {
@@ -31,9 +61,11 @@ const toggle = (event) => {
 
 
 <template>
-    <div class="card flex justify-center">
-        <Button icon="pi pi-ellipsis-v" severity="secondary" rounded @click="toggle" aria-haspopup="true" aria-controls="overlay_menu" />
-        <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
-    </div>
+	<Toast />
+	<Button icon="pi pi-ellipsis-v" severity="secondary" rounded @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
+	<TieredMenu ref="menu" id="overlay_tmenu" :model="items" popup />
 </template>
 
+
+<style scoped>
+</style>

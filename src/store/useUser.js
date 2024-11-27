@@ -4,18 +4,27 @@ import {reactive} from "vue";
 const user = reactive({
 	name: "",
 	email: "",
+	token: "",
+	movielists: [],
+	topTenList: [],
+	watchList: []
 });
 
 const userSettings = reactive({
 	isSignedIn: false,
-	isDarkMode: false
+	isDarkMode: false,
+	language: navigator.language || "en-US",
 });
 
 
 export function useUser(){
-	function setUser({name, email}){
-		user.name = name;
-		user.email = email;
+	function setUser(param){
+		const {name, email, token, movielists} = param;
+
+		if(name) user.name = name;
+		if(email) user.email = email;
+		if(token) user.token = token;
+		if(movielists) user.movielists = movielists;
 	}
 
 	function getUser(){

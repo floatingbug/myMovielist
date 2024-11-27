@@ -9,6 +9,8 @@ import Aura from "@primevue/themes/aura";
 import Button from "primevue/button";
 import {definePreset} from "@primevue/themes";
 import semantic from "./theme/semantic.js";
+import ToastService from "primevue/toastservice";
+import Toast from "primevue/toast";
 
 const custom_preset = definePreset(Aura, {
 	semantic,
@@ -16,8 +18,8 @@ const custom_preset = definePreset(Aura, {
 
 const app = createApp(App)
 
-app.use(router)
-
+app.use(router);
+app.use(ToastService);
 app.use(PrimeVue, {
 	theme: {
 		preset: custom_preset,
@@ -28,5 +30,6 @@ app.use(PrimeVue, {
 });
 
 app.component("Button", Button);
+app.component("Toast", Toast);
 
 app.mount('#app')

@@ -5,8 +5,8 @@ import InputText from "primevue/inputtext";
 import InputGroup from "primevue/inputgroup";
 import InputGroupAddon from "primevue/inputgroupaddon";
 import FloatLabel from "primevue/floatlabel";
-import ProgressSpinner from  "@/components/utils/ProgressSpinner.vue";
-import {useSignIn} from "./composables/useSignIn.js";
+import ProgressSpinner from  "@/utils/ProgressSpinner.vue";
+import {useSignIn} from "@/components/Authorization/composables/useSignIn.js";
 import {useUser} from "@/store/useUser.js";
 
 
@@ -20,7 +20,8 @@ const fields = reactive({
 const fieldKeys = Object.keys(fields);
 const router = useRouter();
 const isProgress = ref(false);
-const {setUser, setUserSettings} = useUser();
+const {setUser, setUserSettings, getUser} = useUser();
+const user = getUser();
 let preveouseFields = JSON.parse(JSON.stringify(fields));
 
 
@@ -43,13 +44,13 @@ async function signIn(){
 
 	if(errors.value) return errArray.value = errors.value;
 
-	setUser({name: data.value.user.name, email: data.value.user.email});
+	setUser({name: data.value.user.name, email: data.value.user.email, token: data.value.token});
 	setUserSettings({isSignedIn: true});
-	localStorage.setItem("token", data.value.token);
+	localStorage.setItem("token", `Bearer ${data.value.token}`);
 	localStorage.setItem("isSignedIn", true);
 
 
-	router.push("/movie-search");
+	router.push("/find-movies");
 }
 </script>
 

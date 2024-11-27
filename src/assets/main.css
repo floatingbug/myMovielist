@@ -10,6 +10,10 @@
 	box-sizing: border-box;
 }
 
+#app {
+	position: relative;
+}
+
 .err-msg {
 	color: var(--p-red-500);
 	display: flex;

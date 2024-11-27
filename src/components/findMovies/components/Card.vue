@@ -1,45 +1,79 @@
 <script setup>
+import CardMenu from "./CardMenu.vue";
+import CircleRating from "./CircleRating.vue";
+
+
+const props = defineProps({
+	movie: Object
+});
+
+
+const IMG_URL_PREFIX = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"
 </script>
 
 
 <template>
-	<header>
-		<slot name="header">
+	<div class="card-container">
+		<header>
 			<img :src="`${IMG_URL_PREFIX}${movie.poster_path}`" alt="">
 			
 			<div class="card-menu">
-				<CardMenu></CardMenu>
+				<CardMenu :movie="movie"></CardMenu>
 			</div>
-		</slot>
-	</header>
-
-	<main>
-		<slot name="main">
+		</header>
+		
+		<main>
 			<div v-if="movie.customizedData && movie.customizedData.rating" class="rating">
 				<CircleRating></CircleRating>
 			</div>
-		</slot>
-	</main>
-
-	<footer>
-		<slot "footer">
+		
+			<div v-else class="no-rating-yet">
+				<Button severity="secondary" variant="text">No rating yet.</Button>
+			</div>
+		</main>
+		
+		<footer>
 			<div class="movie-name">
 				{{movie.title}}
 			</div>
-		</slot>
-	</footer>
+		</footer>
+	</div>
 </template>
 
 
 <style scoped>
+.card-container {
+	display: flex;
+	flex-direction: column;
+	border-radius: 8px;
+	background-color: var(--card-bg);
+}
+
 header {
 	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+}
+
+footer {
+	padding: 1rem;
 }
 
 .card-menu {
 	position: absolute;
-	top: 16px;
-	right: 16px;
+	top: 24px;
+	right: 24px;
+}
+
+.rating, .no-rating-yet {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.movie-name {
+	color: var(--p-primary-color);
 }
 
 img {

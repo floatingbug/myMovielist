@@ -5,6 +5,11 @@ import footerRoutes from "../components/footer/router/index.js";
 import findMoviesRouts from "../components/findMovies/router/index.js";
 import dashboardRoutes from "../components/dashboard/router/index.js";
 import publicListsRoutes from "../components/publicLists/router/index.js";
+import addMovieListRoutes from "../components/addMovieList/router/index.js";
+import movielistsRoutes from "../components/movielists/router/index.js";
+
+
+import TestView from "../views/TestView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +24,14 @@ const router = createRouter({
 	  ...findMoviesRouts,
 	  ...dashboardRoutes,
 	  ...publicListsRoutes,
+	  ...addMovieListRoutes,
+	  ...movielistsRoutes,
+
+	  {
+		  path: "/test",
+		  name: "test",
+		  component: TestView
+	  }
   ]
 })
 

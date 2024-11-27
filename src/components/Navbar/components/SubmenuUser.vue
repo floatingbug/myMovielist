@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from "vue";
+import {useRouter} from "vue-router";
 import Menu from 'primevue/menu';
 import {useUser} from "@/store/useUser.js";
 
 
+const router = useRouter();
 const {getUserSettings, getUser} = useUser();
 const userSettings = getUserSettings();
 const user = getUser();
@@ -18,14 +20,18 @@ const items = ref([
             },
             {
                 label: 'My Lists',
-                icon: 'pi pi-list'
+                icon: 'pi pi-list',
+				command: () => {
+					router.push("/movielists")
+				}
             },
             {
                 label: 'Sign Out',
                 icon: 'pi pi-upload',
 				command: () => {
-					localStorage.setItem("isSignedIn", false);
 					userSettings.isSignedIn = false;
+					localStorage.removeItem("token");
+					localStorage.setItem("isSignedIn", false);
 				}
             }
         ]

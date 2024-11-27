@@ -5,9 +5,9 @@ import InputText from "primevue/inputtext";
 import InputGroup from "primevue/inputgroup";
 import InputGroupAddon from "primevue/inputgroupaddon";
 import FloatLabel from "primevue/floatlabel";
-import {useSignUp} from "./composables/useSignUp.js";
-import ProgressSpinner from "@/components/utils/ProgressSpinner.vue";
-import CheckBox from "./components/CheckBox.vue";
+import {useSignUp} from "@/components/Authorization/composables/useSignUp.js";
+import ProgressSpinner from "@/utils/ProgressSpinner.vue";
+import CheckBox from "@/components/Authorization/components/CheckBox.vue";
 
 
 const errArray = ref([]);
