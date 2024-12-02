@@ -8,6 +8,7 @@ import {useUser} from "./store/useUser.js";
 import {useFetch} from "./composables/useFetch.js";
 
 
+
 const {device} = useDeviceSize();
 const {setUserSettings, getUserSettings, setUser, getUser} = useUser();
 const userSettings = getUserSettings();
