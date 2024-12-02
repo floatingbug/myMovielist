@@ -3,6 +3,7 @@ import {ref, onMounted} from "vue";
 import Movie from "./Movie.vue";
 import Panel from 'primevue/panel';
 import ProgressSpinner from "@/utils/ProgressSpinner.vue";
+import MovielistMenu from "./MovielistMenu.vue";
 
 
 const props = defineProps({
@@ -10,16 +11,34 @@ const props = defineProps({
 });
 
 
+const emit = defineEmits();
+
+
 const isProcessing = ref(false);
 const isCollapsed = ref(true);
+
+
+function handleMenuActions(data){
+	emit("menu:action", data);
+}
 </script>
 
 
 <template>
-	<Panel class="list" :header="props.movielist.name" :collapsed="isCollapsed" toggleable>
+	<Panel class="list" :collapsed="isCollapsed" toggleable>
+		<template #header>
+			<div class="panel-header-left">
+				<span>
+					{{props.movielist.name}}
+				</span>
+				
+				<MovielistMenu class="movielist-menu" :movielistId="props.movielist.movielistId" @menu:action="handleMenuActions"></MovielistMenu>
+			</div>
+		</template>
+
 		<ProgressSpinner v-if="isProcessing"></ProgressSpinner>
 
-		<h1>{{props.movielist.name}}</h1>
+		<h2 style="text-align: center;">{{props.movielist.name}}</h2>
 		
 		{{props.movielist.description}}
 				
@@ -43,9 +62,24 @@ const isCollapsed = ref(true);
 	background-color: var(--movielist-bg);
 }
 
+:deep(.p-panel-content) {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
 .movies-container {
 	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
 	gap: 2rem;
 	margin-top: 2rem;
+}
+
+.panel-header-left {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
 }
 </style>

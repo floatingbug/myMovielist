@@ -8,8 +8,12 @@ import {useToast} from "primevue/usetoast";
 
 
 const props = defineProps({
-	movie: Object
+	movie: Object,
+	movielist: Object 
 });
+
+
+const emit = defineEmits(["menu:action"]);
 
 
 const toast = useToast();
@@ -19,11 +23,7 @@ const router = useRouter();
 const menu = ref();
 const movielists = user.movielists?.map(list => ({
 	label: list.name,
-	command: async () => {
-		const data = await addToMovielist({movie: props.movie, movielist: list});
-		if(data.value.success) toast.add({ severity: 'contrast', summary: 'Movie Added', detail: data.value.msg, life: 3000 });
-		else toast.add({ severity: 'contrast', summary: 'Movie not added', detail: data.value.msg, life: 3000 });
-	}
+	command: addMovie(list)
 })) || [];
 const items = ref([
 	{
@@ -54,6 +54,27 @@ const items = ref([
 	},
 ]);
 
+
+function addMovie(list){
+	return async () => {
+		console.log(list);
+		emit("menu:action", {
+			action: "processing",
+			isProcessing: true
+		});
+
+		const data = await addToMovielist({movie: props.movie, movielist: list});
+		if(data.value.success) toast.add({ severity: 'contrast', summary: 'Movie Added', detail: data.value.msg, life: 3000 });
+		else toast.add({ severity: 'contrast', summary: 'Movie not added', detail: data.value.msg, life: 3000 });
+
+		emit("menu:action", {
+			action: "processing",
+			isProcessing: false
+		});
+	};
+}
+
+
 const toggle = (event) => {
     menu.value.toggle(event);
 };
@@ -61,7 +82,6 @@ const toggle = (event) => {
 
 
 <template>
-	<Toast />
 	<Button icon="pi pi-ellipsis-v" severity="secondary" rounded @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
 	<TieredMenu ref="menu" id="overlay_tmenu" :model="items" popup />
 </template>

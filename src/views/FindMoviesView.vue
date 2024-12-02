@@ -11,6 +11,7 @@ import {findMovies} from "@/components/findMovies/helpers/findMovies.js";
 import {handlePage} from "@/components/findMovies/helpers/handlePage.js";
 import {handleFilter} from "@/components/findMovies/helpers/handleFilter.js";
 import {getMovielists} from "@/components/findMovies/helpers/getMovielists.js";
+import ProgressSpinner from "@/utils/ProgressSpinner.vue";
 
 
 let token = "";
@@ -23,6 +24,8 @@ const filterQuery = ref(null);
 const {getUserSettings} = useUser();
 const userSettings = getUserSettings();
 const isInitialized = ref(false);
+const isProcessing = ref(true);
+const movieCount = ref(null);
 
 
 onMounted(async () => {
@@ -31,21 +34,31 @@ onMounted(async () => {
 	//find movies
 	await findMovies({page, token, movies, metaData, genreList})
 
+	//not more pages than 500 (TMDB dont allow more)
+	if(metaData.value.totalResults > 500) metaData.value.totalResults = 499;
+
 	//get movielists
 	await getMovielists({token});
 
 	isInitialized.value = true;
+	isProcessing.value = false;
 });
 
 
 //handel pagination
-function updatePage(event){
-	handlePage({event, page, token, movies, metaData, filterQuery});
+async function updatePage(event){
+	await handlePage({event, page, token, movies, metaData, filterQuery, isProcessing});
 }
 
 //handle filter
 async function handleQueryEvent(event){
 	handleFilter({event, token, page, movies, metaData, filterQuery});
+}
+
+//handle menuAction event
+function handleMenuAction(event){
+	if(event.action === "processing" && event.isProcessing) isProcessing.value = true;
+	else isProcessing.value = false;
 }
 
 function scrollToTop(){
@@ -62,6 +75,8 @@ function scrollToTop(){
 	</header>
 
 	<main>
+		<ProgressSpinner v-if="isProcessing" class="process-spinner"></ProgressSpinner>
+
 		<MoveUpButton class="move-up-button-container" @scrollToTop="scrollToTop"></MoveUpButton>
 
 		<div class="main-content" :class="{'main-content-sd': device === 'sd'}">
@@ -71,7 +86,7 @@ function scrollToTop(){
 			
 			<div v-if="isInitialized" class="movies-container">
 				<div class="movie card" v-for="movie in movies">
-					<Card :movie="movie">
+					<Card :movie="movie" @menu:action="handleMenuAction">
 					</Card>
 				</div>
 			</div>
@@ -79,7 +94,7 @@ function scrollToTop(){
 	</main>
 
 	<footer>
-		<Paginator v-if="metaData" :rows="20" :totalRecords="metaData.totalResults" @pageChange="updatePage"></Paginator>
+		<Paginator v-if="isInitialized" :rows="20" :totalRecords="metaData.totalResults" @pageChange="updatePage"></Paginator>
 	</footer>
 </template>
 

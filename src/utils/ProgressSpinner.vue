@@ -5,20 +5,30 @@ import ProgressSpinner from 'primevue/progressspinner';
 
 
 <template>
-	<ProgressSpinner />
+	<div class="progress-spinner-container">
+		<ProgressSpinner />
+	</div>
 </template>
 
 
 <style scoped>
-.p-progressspinner {
+.progress-spinner-container {
 	width: 100%;
-	height: 100%;
-	position: absolute;
+	height: 100dvh;
+	position: fixed;
+	top: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--progress-spinner-bg);
+	z-index: 999;
+}
+
+.p-progressspinner {
+	width: 50%;
 	left: 0;
 	top: 0;
 	z-index: 1000;
 	border-radius: 8px;
-	background-color: rgb(from var(--p-surface-500) r g b / 50%);
-	backdrop-filter: blur(8px);
 }
 </style>

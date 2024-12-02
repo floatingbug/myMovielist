@@ -4,11 +4,20 @@ import CircleRating from "./CircleRating.vue";
 
 
 const props = defineProps({
-	movie: Object
+	movie: Object,
+	movielist: Object
 });
 
 
+const emit = defineEmits(["menu:action"]);
+
+
 const IMG_URL_PREFIX = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"
+
+
+function handleMenuAction(data){
+	emit("menu:action", data);
+}
 </script>
 
 
@@ -18,7 +27,7 @@ const IMG_URL_PREFIX = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"
 			<img :src="`${IMG_URL_PREFIX}${movie.poster_path}`" alt="">
 			
 			<div class="card-menu">
-				<CardMenu :movie="movie"></CardMenu>
+				<CardMenu :movie="movie" :movielist="movielist" @menu:action="handleMenuAction"></CardMenu>
 			</div>
 		</header>
 		

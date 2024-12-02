@@ -4,7 +4,8 @@ import Paginator from 'primevue/paginator';
 
 const emit = defineEmits(["pageChange"]);
 
-defineProps({
+
+const props = defineProps({
 	rows: Number,
 	totalRecords: Number,
 	rowsPerPageOptions: Array
@@ -13,7 +14,7 @@ defineProps({
 
 
 <template>
-   	<Paginator :rows="rows" :totalRecords="totalRecords" :rowsPerPageOptions="rowsPerPageOptions" @page="emit('pageChange', $event)"></Paginator>
+   	<Paginator :rows="rows" :totalRecords="props.totalRecords" :rowsPerPageOptions="props.rowsPerPageOptions" @page="emit('pageChange', $event)"></Paginator>
 </template>
 
 

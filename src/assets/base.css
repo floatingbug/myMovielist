@@ -1,8 +1,10 @@
 :root {
-	--navbar-bg-sd: rgb(from var(--p-surface-200) r g b / 50%);
+	--navbar-bg-sd: rgb(from var(--p-surface-500) r g b / 50%);
 	--card-bg: rgb(from var(--p-surface-400) r g b / 20%);
-	--movielist-bg: rgb(from var(--p-surface-400) r g b / 20%);
-	--movie-bg: rgb(from var(--p-surface-700) r g b / 20%);
+	--movielist-bg: rgb(from var(--p-surface-200) r g b / 50%);
+	--movie-bg: rgb(from var(--p-surface-200) r g b / 50%);
+	--overlay-bg: rgb(from var(--p-surface-700) r g b / 20%);
+	--progress-spinner-bg: rgb(from var(--p-surface-700) r g b / 80%);
 }
 
 .dark-mode {
@@ -10,4 +12,6 @@
 	--card-bg: rgb(from var(--p-surface-700) r g b / 20%);
 	--movielist-bg: rgb(from var(--p-surface-700) r g b / 20%);
 	--movie-bg: rgb(from var(--p-surface-700) r g b / 20%);
+	--overlay-bg: rgb(from var(--p-surface-700) r g b / 20%);
+	--progress-spinner-bg: rgb(from var(--p-surface-700) r g b / 80%);
 }

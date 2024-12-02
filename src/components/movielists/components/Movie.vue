@@ -56,10 +56,6 @@ async function handleDeleteMovie(){
     	toast.add({ severity: 'info', summary: 'Movie not deleted', detail: data.value.msg, life: 3000 });
 	}
 }
-
-
-const show = () => {
-};
 </script>
 
 
@@ -89,6 +85,8 @@ const show = () => {
 
 <style scoped>
 .movie {
+	width: 320px;
+	min-width: 280px;
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
@@ -97,14 +95,14 @@ const show = () => {
 	background-color: var(--movie-bg);
 }
 
-header {
-	position: relative;
-}
-
 main {
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
+}
+
+header {
+	position: relative;
 }
 
 img {

@@ -96,5 +96,6 @@ footer {
 	height: 50px;
 	padding: 0 2rem;
 	border-top: 1px solid var(--p-surface-500);
+	margin-top: 10rem;
 }
 </style>

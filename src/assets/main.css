@@ -12,6 +12,7 @@
 
 #app {
 	position: relative;
+	width: 100%;
 }
 
 .err-msg {

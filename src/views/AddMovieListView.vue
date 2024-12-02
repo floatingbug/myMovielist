@@ -5,6 +5,8 @@ import FloatLabel from "primevue/floatlabel";
 import Textarea from 'primevue/textarea';
 import Select from 'primevue/select';
 import {useAddMovieList} from "@/components/addMovieList/composables/useAddMovieList.js";
+import ProgressSpinner from "@/utils/ProgressSpinner.vue";
+import {useToast} from "primevue/usetoast";
 
 
 const list = reactive({
@@ -29,6 +31,8 @@ const selected = ref(
 	},
 );
 const errMsg = ref("");
+const isProcessing = ref(false);
+const toast = useToast();
 
 
 watch(() => list.name, () => {
@@ -41,8 +45,21 @@ async function createList(){
 		return errMsg.value = "List Name is required."
 	}
 
+	isProcessing.value = true;
+
 	const {data, error} = await useAddMovieList(list);
-	console.log(data, error);
+
+
+	isProcessing.value = false;
+
+	if(!data.value.success){
+		return toast.add({ severity: 'warn', summary: 'Not added', detail: data.value.msg, life: 3000 });
+	}
+
+	toast.add({ severity: 'info', summary: 'Added', detail: data.value.msg, life: 3000 });
+
+	list.name = "";
+	list.description = "";
 }
 
 
@@ -50,15 +67,17 @@ async function createList(){
 
 
 <template>
+	<ProgressSpinner v-if="isProcessing"></ProgressSpinner>
+
 	<div class="form-container">
 		<div class="form-content">
 			<FloatLabel>
-				<InputText id="name" @value-change="list.name = $event"></InputText>
+				<InputText id="name" v-model="list.name" @value-change="list.name = $event"></InputText>
 				<label for="name">List Name</label>
 			</FloatLabel>
 
 			<FloatLabel>
-				<Textarea id="description" @value-change="list.description = $event"></Textarea>
+				<Textarea id="description" v-model="list.description" @value-change="list.description = $event"></Textarea>
 				<label for="description">Description</label>
 			</FloatLabel>
 		

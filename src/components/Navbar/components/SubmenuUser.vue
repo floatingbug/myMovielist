@@ -26,12 +26,20 @@ const items = ref([
 				}
             },
             {
+                label: "Add Movielist",
+                icon: "pi pi-list",
+                command: () => {
+                    router.push("/add-movie-list")
+                }
+            },
+            {
                 label: 'Sign Out',
                 icon: 'pi pi-upload',
 				command: () => {
 					userSettings.isSignedIn = false;
 					localStorage.removeItem("token");
 					localStorage.setItem("isSignedIn", false);
+                    router.push("/sign-in");
 				}
             }
         ]

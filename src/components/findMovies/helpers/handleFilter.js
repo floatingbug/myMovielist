@@ -24,4 +24,5 @@ export async function handleFilter(param){
 	console.log(path);
 	movies.value = data.value.movies;
 	metaData.value = data.value.metaData;
+	metaData.value.totalResults = metaData.value.totalResults > 499 ? 499 : metaData.value.totalResults;
 }

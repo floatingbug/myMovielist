@@ -11,7 +11,7 @@ export async function useAddMovieList(list){
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
-			"Authorization": `Bearer ${user.token}`
+			"Authorization": user.token
 		},
 		body: JSON.stringify(list)
 	};
