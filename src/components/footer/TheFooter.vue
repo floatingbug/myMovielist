@@ -4,8 +4,8 @@
 <template>
 	<div class="footer-content">
 		<div class="creator">
-			<p>© 2024 Max Mustermann.</p>
-			<p>Kontakt: support@example.com</p>
+			<p>© 2024 Thomas Hof.</p>
+			<p>Kontakt: thomas.hof1984@gmail.com</p>
 		</div>
 
 		<div class="legal-terms">
@@ -29,6 +29,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	flex-wrap: wrap;
 	gap: 1rem;
 	padding: 4rem 0;
 }

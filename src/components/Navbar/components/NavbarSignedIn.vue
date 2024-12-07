@@ -38,7 +38,7 @@ function closeNavbar(e){
 	
 		<div class="navbar-right">
 			<div class="links">
-				<Button as="router-link" to="/find-movies" variant="text">Movie Search</Button>
+				<Button as="router-link" to="/find-movies" variant="text">Discover Movies</Button>
 				
 				<Button as="router-link" to="/public-lists" variant="text">Public Lists</Button>
 			</div>

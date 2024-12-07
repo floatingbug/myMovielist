@@ -6,6 +6,9 @@ import TheNavbar from "./components/Navbar/TheNavbar.vue";
 import TheFooter from "@/components/footer/TheFooter.vue";
 import {useUser} from "./store/useUser.js";
 import {useFetch} from "./composables/useFetch.js";
+import {useProgress} from "./composables/useProgress.js";
+import ProgressSpinner from "./components/ProgressSpinner.vue";
+import MoveUpButton from "./components/MoveUpButton.vue";
 
 
 
@@ -13,10 +16,13 @@ const {device} = useDeviceSize();
 const {setUserSettings, getUserSettings, setUser, getUser} = useUser();
 const userSettings = getUserSettings();
 const user = getUser();
+const isProgress = useProgress();
 const isInitialized = ref(false);
 
 
 onMounted(async () => {
+	isProgress.value = true;
+
 	const token = localStorage.getItem("token");
 	const isSignedIn = localStorage.getItem("isSignedIn");
 	
@@ -50,6 +56,7 @@ onMounted(async () => {
 	}
 
 	isInitialized.value = true;
+	isProgress.value = false;
 });
 
 async function getUserFromServer(token){
@@ -64,9 +71,25 @@ async function getUserFromServer(token){
 
 	return data.value.user;
 } 
+
+
+function handleMoveActions(event){
+	if(event.target.type !== "APP") return;
+
+	if(event.action === "moveUp"){
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth"
+		});
+	}
+}
 </script>
 
 <template>
+	<MoveUpButton class="move-up-button" @move:action="handleMoveActions"></MoveUpButton>
+
+	<ProgressSpinner v-if="isProgress"></ProgressSpinner>
+
 	<Toast></Toast>
 
 	<TheNavbar v-if="isInitialized" />
@@ -98,5 +121,12 @@ footer {
 	padding: 0 2rem;
 	border-top: 1px solid var(--p-surface-500);
 	margin-top: 10rem;
+}
+
+.move-up-button {
+	position: fixed;
+	right: 1rem;
+	top: 2rem;
+	z-index: 1000;
 }
 </style>
