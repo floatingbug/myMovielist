@@ -12,7 +12,6 @@ export async function findMovies(param){
 	const {page, query} = param;
 
 	const path = `/discover-movies?language=${userSettings.language}&page=${page}${query ? `&${query}`: ""}`;
-	console.log(path);
 	const options = {
 		method: "GET",
 		headers: {

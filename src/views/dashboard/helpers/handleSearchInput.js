@@ -1,8 +1,8 @@
 import {useFetch} from "@/composables/useFetch.js";
 
 export async function handleSearchInput(param){
-	const {input} = param;
-	const path = `/search-movies?page=1&input=${input}`;
+	const {input, page} = param;
+	const path = `/search-movies?page=${page ? page : ""}&input=${input}`;
 	const options = {
 		method: "GET"
 	};

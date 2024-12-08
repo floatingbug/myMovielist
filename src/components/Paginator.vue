@@ -17,6 +17,9 @@ const adjustedTotalRecords = ref(props.totalRecords);
 
 const paginatorActions = {
 	emitPage: (event) => {
+		//TMDB index starts with 1, paginator with 0 therefore page++
+		event.page++;
+
 		emit("paginator:action", {
 			action: "page",
 			target: {

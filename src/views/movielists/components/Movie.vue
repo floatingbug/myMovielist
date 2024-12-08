@@ -53,7 +53,7 @@ async function handleDeleteMovie(){
     	toast.add({ severity: 'info', summary: 'Movie deleted', detail: data.value.msg, life: 3000 });
 	}
 	else{
-    	toast.add({ severity: 'info', summary: 'Movie not deleted', detail: data.value.msg, life: 3000 });
+    	toast.add({ severity: 'warn', summary: 'Not deleted', detail: data.value.msg, life: 3000 });
 	}
 }
 </script>
@@ -107,7 +107,6 @@ header {
 
 img {
 	width: 100%;
-	max-width: 200px;
 }
 
 .movie-menu {

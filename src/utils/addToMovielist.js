@@ -20,7 +20,7 @@ export async function addToMovielist(param){
 				movieId: movie.id,
 				title: movie.title,
 				description: movie.overview,
-				cover: `${IMG_URL_PREFIX}${movie.backdrop_path}`,
+				cover: `${IMG_URL_PREFIX}${movie.poster_path}`,
 			},
 			movielistId: movielist.movielistId
 		})

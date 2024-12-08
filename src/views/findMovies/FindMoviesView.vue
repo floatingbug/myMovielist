@@ -60,9 +60,6 @@ async function handlePaginatorActions(event){
 	if(event.target.type !== "findMovies") return;
 
 	if(event.action === "page"){
-		//TMDB index starts with 1, paginator with 0 therefore page++
-		event.data.page++;
-
 		isProgress.value = true;
 		const {data, errors} = await findMovies({page: event.data.page, query: query.value});
 		isProgress.value = false;
