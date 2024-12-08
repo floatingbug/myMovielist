@@ -47,12 +47,15 @@ onMounted(async () => {
 
 	//handle user and user-settings
 	if(token){
-		const user = await getUserFromServer(token);
-		setUser({
-			name: user.name,
-			email: user.email,
-			token: token
-		});
+		const {data, errors} = await getUserFromServer(token);
+
+		if(data.value.success){
+			setUser({
+				name: user.name,
+				email: user.email,
+				token: token
+			});
+		}
 	}
 
 	isInitialized.value = true;
@@ -69,7 +72,7 @@ async function getUserFromServer(token){
 
 	const {data, errors} = await useFetch("/get-user", options);
 
-	return data.value.user;
+	return {data, errors};
 } 
 
 
