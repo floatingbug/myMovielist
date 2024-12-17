@@ -11,6 +11,7 @@ import {useToast} from "primevue/usetoast";
 import RatingForm from "@/components/RatingForm.vue";
 import {addRating} from "@/utils/addRating.js";
 import {useUser} from "@/store/useUser.js";
+import {determineAverageRating} from "@/utils/determineAverageRating.js";
 
 
 const {getUser} = useUser();
@@ -38,19 +39,7 @@ onMounted(async () => {
 	totalRecords.value = movieData.value.metaData.totalResults;
 
 	//add ratings to movies
-	movies.value.forEach(movie => {
-		let ratingCount = 0;
-		let ratingSum = 0;
-
-		if(!movie.customizedData) return;
-
-		for(let i = 0; i < movie.customizedData.length; i++){
-			ratingCount++;
-			ratingSum += movie.customizedData[i].rating;
-		}
-
-		movie.averageRating = ratingSum / ratingCount;
-	});
+	determineAverageRating(movies);
 
 	//get movielists
 	const {data: movielistsData, errors: movielistsErrors} = await getMovielists();
@@ -74,6 +63,9 @@ async function handleFilterActions(event){
 
 		movies.value = data.value.movies;
 		totalRecords.value = data.value.metaData.totalResults;
+	
+		//add ratings to movies
+		determineAverageRating(movies);
 	}
 }
 
@@ -87,6 +79,9 @@ async function handlePaginatorActions(event){
 
 		movies.value = data.value.movies;
 		totalRecords.value = data.value.metaData.totalResults;
+	
+		//add ratings to movies
+		determineAverageRating(movies);
 	}
 }
 
@@ -111,8 +106,6 @@ async function handleRatingActions(event){
 	if(event.action === "close") ratingMovieId.value = 0;
 
 	if(event.action === "submitRating"){
-		console.log(event);
-		
 		const {data, errors} = await addRating({
 			token: user.token,
 			movieId: event.data.movieId, 
@@ -122,10 +115,32 @@ async function handleRatingActions(event){
 		});
 
 		if(!data.value.success){
+			ratingMovieId.value = 0;
 			return toast.add({ severity: 'warn', summary: 'not added', detail: data.value.msg, life: 3000 });
 		}
-		
 		toast.add({ severity: 'info', summary: 'Added', detail: data.value.msg, life: 3000 });
+
+		//update movie rating localy
+		const changedMovie = movies.value.find(movie => movie.id === event.data.movieId);
+
+		if(!changedMovie.customizedData) {
+			changedMovie.averageRating = event.data.rating;
+			ratingMovieId.value = 0;
+			return;
+		}
+
+		let ratingCount = 0;
+		let ratingSum = 0;
+
+		for(let i = 0; i < changedMovie.customizedData.length; i++){
+			ratingCount++;
+			ratingSum += changedMovie.customizedData[i].rating;
+		}
+
+
+		changedMovie.averageRating = (ratingSum + event.data.rating) / (ratingCount + 1);
+
+		ratingMovieId.value = 0;
 	}
 }
 </script>

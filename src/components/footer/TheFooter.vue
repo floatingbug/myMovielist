@@ -31,7 +31,7 @@
 	justify-content: space-between;
 	flex-wrap: wrap;
 	gap: 1rem;
-	padding: 4rem 0;
+	padding: 0 2rem;
 }
 
 .creator {

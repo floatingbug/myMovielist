@@ -1,10 +1,15 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import Rating from 'primevue/rating';
 
 
 const props = defineProps({
     rating: Number
+});
+
+
+watch(() => props.rating, (newVal) => {
+    value.value = newVal;
 });
 
 

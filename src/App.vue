@@ -120,8 +120,7 @@ main {
 
 footer {
 	width: 100%;
-	height: 50px;
-	padding: 0 2rem;
+	height: 200px;
 	border-top: 1px solid var(--p-surface-500);
 	margin-top: 10rem;
 }
