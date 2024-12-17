@@ -8,8 +8,13 @@ import {useProgress} from "@/composables/useProgress.js";
 import {getMovielists} from "@/utils/getMovielists.js";
 import {addToMovielist} from "@/utils/addToMovielist.js";
 import {useToast} from "primevue/usetoast";
+import RatingForm from "@/components/RatingForm.vue";
+import {addRating} from "@/utils/addRating.js";
+import {useUser} from "@/store/useUser.js";
 
 
+const {getUser} = useUser();
+const user = getUser();
 const movies = ref([]);
 const movielists = ref([]);
 const genreList = ref([]);
@@ -19,6 +24,7 @@ const query = ref("");
 const rows = ref(20);
 const isProgress = useProgress();
 const toast = useToast();
+const ratingMovieId = ref(0);
 
 
 onMounted(async () => {
@@ -30,6 +36,21 @@ onMounted(async () => {
 	movies.value = movieData.value.movies;
 	genreList.value = movieData.value.genreList.genres;
 	totalRecords.value = movieData.value.metaData.totalResults;
+
+	//add ratings to movies
+	movies.value.forEach(movie => {
+		let ratingCount = 0;
+		let ratingSum = 0;
+
+		if(!movie.customizedData) return;
+
+		for(let i = 0; i < movie.customizedData.length; i++){
+			ratingCount++;
+			ratingSum += movie.customizedData[i].rating;
+		}
+
+		movie.averageRating = ratingSum / ratingCount;
+	});
 
 	//get movielists
 	const {data: movielistsData, errors: movielistsErrors} = await getMovielists();
@@ -70,8 +91,6 @@ async function handlePaginatorActions(event){
 }
 
 async function handleCardMenuActions(event){
-	if(event.target.type !== "findMovies") return;
-
 	if(event.action === "addMovieToMovielist"){
 		const {data, errors} = await addToMovielist({movie: event.data.movie, movielist: event.data.movielist});
 
@@ -80,6 +99,32 @@ async function handleCardMenuActions(event){
 			return;
 		}
 		    
+		toast.add({ severity: 'info', summary: 'Added', detail: data.value.msg, life: 3000 });
+	}
+
+	else if(event.action === "addRating"){
+		ratingMovieId.value = event.data.movieId;
+	}
+}
+
+async function handleRatingActions(event){
+	if(event.action === "close") ratingMovieId.value = 0;
+
+	if(event.action === "submitRating"){
+		console.log(event);
+		
+		const {data, errors} = await addRating({
+			token: user.token,
+			movieId: event.data.movieId, 
+			dataType: "rating", 
+			rating: event.data.rating,
+			comment: event.data.comment
+		});
+
+		if(!data.value.success){
+			return toast.add({ severity: 'warn', summary: 'not added', detail: data.value.msg, life: 3000 });
+		}
+		
 		toast.add({ severity: 'info', summary: 'Added', detail: data.value.msg, life: 3000 });
 	}
 }
@@ -96,7 +141,11 @@ async function handleCardMenuActions(event){
 		</div>
 
 		<div class="main-movies">
-			<MovieCard v-for="(movie, index) in movies" :movie="movie" :movielists="movielists" @cardMenu:action="handleCardMenuActions"></MovieCard>
+			<MovieCard v-for="(movie, index) in movies" :movie="movie" :movielists="movielists" @cardMenu:action="handleCardMenuActions">
+				<template #rating>
+					<RatingForm v-if="movie.id === ratingMovieId" @rating:action="handleRatingActions" :movie="movie"></RatingForm>
+				</template>
+			</MovieCard>
 		</div>
 	</main>
 

@@ -36,6 +36,14 @@ const menuActions = {
 				}
 			});
 		}
+	},
+	addRating: function() {
+		emit("cardMenu:action", {
+			action: "addRating",
+			data: {
+				movieId: props.movie.id
+			}
+		});
 	}
 };
 
@@ -69,7 +77,8 @@ const items = ref([
 	},
 	{
 		label: 'Add rating',
-		icon: 'pi pi-star-fill'
+		icon: 'pi pi-star-fill',
+		command: menuActions.addRating
 	},
 ]);
 

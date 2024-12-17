@@ -1,11 +1,17 @@
 <script setup>
+import {ref} from "vue";
 import CardMenu from "./CardMenu.vue";
-import CircleRating from "./CircleRating.vue";
+import CardRating from "./CardRating.vue";
+import MovieRating from "./CardRating.vue";
+import RatingForm from "./RatingForm.vue";
+import {useFetch} from "../composables/useFetch.js";
+import {useUser} from "../store/useUser.js";
+import {addRating} from "@/utils/addRating.js";
 
 
 const props = defineProps({
 	movie: Object,
-	movielists: Array
+	movielists: Array,
 });
 
 
@@ -13,18 +19,21 @@ const emit = defineEmits(["cardMenu:action"]);
 
 
 const IMG_URL_PREFIX = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"
+const {getUser} = useUser();
+const user = getUser();
+const showRatingForm = ref(true);
 
 
 function handleMenuActions(event){
-	if(event.target.type === "findMovies"){
-		return emit("cardMenu:action", event);
-	}
+	return emit("cardMenu:action", event);
 }
 </script>
 
 
 <template>
 	<div class="card-container">
+		<slot name="rating"></slot>
+
 		<header>
 			<img :src="`${IMG_URL_PREFIX}${movie.poster_path}`" alt="">
 			
@@ -34,12 +43,15 @@ function handleMenuActions(event){
 		</header>
 		
 		<main>
-			<div v-if="movie.customizedData && movie.customizedData.rating" class="rating">
-				<CircleRating></CircleRating>
+			<div v-if="props.movie.averageRating" class="rating">
+				<span>User Rating:&nbsp;</span>
+				<CardRating :rating="movie.averageRating"></CardRating>
 			</div>
 		
 			<div v-else class="no-rating-yet">
-				<Button severity="secondary" variant="text">No rating yet.</Button>
+				<span>
+					No rating yet.
+				</span>
 			</div>
 		</main>
 		
@@ -56,11 +68,14 @@ function handleMenuActions(event){
 .card-container {
 	width: 10%;
 	min-width: 280px;
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	border-radius: 8px;
 	background-color: var(--card-bg);
 }
+
+
 
 header {
 	position: relative;
@@ -83,6 +98,7 @@ footer {
 .rating, .no-rating-yet {
 	display: flex;
 	justify-content: flex-end;
+	padding: 0 1rem;
 }
 
 .movie-name {

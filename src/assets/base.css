@@ -5,6 +5,7 @@
 	--movie-bg: rgb(from var(--p-surface-200) r g b / 50%);
 	--overlay-bg: rgb(from var(--p-surface-700) r g b / 20%);
 	--progress-spinner-bg: rgb(from var(--p-surface-700) r g b / 80%);
+	--surface-bg: var(--p-surface-200);
 }
 
 .dark-mode {
@@ -14,4 +15,5 @@
 	--movie-bg: rgb(from var(--p-surface-700) r g b / 20%);
 	--overlay-bg: rgb(from var(--p-surface-700) r g b / 20%);
 	--progress-spinner-bg: rgb(from var(--p-surface-700) r g b / 80%);
+	--surface-bg: var(--p-surface-900);
 }

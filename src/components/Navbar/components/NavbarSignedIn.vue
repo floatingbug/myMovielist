@@ -65,7 +65,7 @@ function closeNavbar(e){
 
 		<div class="navbar-center">
 			<div class="sign-buttons">
-				<Button as="router-link" to="/find-movies" severity="contrast" variant="outlined">Movie Search</Button>
+				<Button as="router-link" to="/find-movies" severity="contrast" variant="outlined">Discover Movies</Button>
 				
 				<Button as="router-link" to="/dashboard" severity="contrast" variant="outlined">Search Movies</Button>
 				
