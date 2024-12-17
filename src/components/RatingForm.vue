@@ -49,7 +49,7 @@ watch(stars, (newVal) => {
 		</div>
 
 		<div class="mid">
-			<span>Rating movie {{movie.original_title}}</span>
+			<span><span style="color: var(--p-primary-color)">Rating movie:</span> {{movie.original_title}}</span>
 
 			<Rating v-model="stars" />
 
