@@ -9,8 +9,8 @@
 		</div>
 
 		<div class="legal-terms">
-			<a href="/terms-of-use">terms of Use</a>
-			<a href="/privacy-policy">Privacy Policy</a>
+			<a href="/mymovielist/terms-of-use">terms of Use</a>
+			<a href="/mymovielist/privacy-policy">Privacy Policy</a>
 		</div>
 		
     	<div class="tmdb">
