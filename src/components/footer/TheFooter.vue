@@ -9,8 +9,8 @@
 		</div>
 
 		<div class="legal-terms">
-			<a href="/mymovielist/terms-of-use">terms of Use</a>
-			<a href="/mymovielist/privacy-policy">Privacy Policy</a>
+			<Button as="router-link" to="/terms-of-use" variant="link">Terms Of Use</Button>
+			<Button as="router-link" to="/privacy-policy" variant="link">Privacy Policy</Button>
 		</div>
 		
     	<div class="tmdb">
