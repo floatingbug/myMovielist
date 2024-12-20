@@ -44,7 +44,7 @@ async function signIn(){
 
 	if(errors.value) return errArray.value = errors.value;
 
-	setUser({name: data.value.user.name, email: data.value.user.email, token: data.value.token});
+	setUser({name: data.value.user.name, email: data.value.user.email, token: `Bearer ${data.value.token}`});
 	setUserSettings({isSignedIn: true});
 	localStorage.setItem("token", `Bearer ${data.value.token}`);
 	localStorage.setItem("isSignedIn", true);

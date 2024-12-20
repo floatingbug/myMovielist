@@ -37,11 +37,13 @@ function closeNavbar(e){
 		</div>
 	
 		<div class="navbar-right">
-			<div class="sign-buttons">
-				<Button as="router-link" to="/sign-in" variant="text">Sign in</Button>
+			<div class="links">
+				<Button as="router-link" to="/sign-in" severity="contrast" variant="text">Sign in</Button>
 				
-				<Button as="router-link" to="/sign-up" variant="text">Sign up</Button>
+				<Button as="router-link" to="/sign-up" severity="contrast" variant="text">Sign up</Button>
 			</div>
+
+			<SubmenuUser></SubmenuUser>
 
 			<ToggleSwitch></ToggleSwitch>
 		</div>
@@ -50,18 +52,20 @@ function closeNavbar(e){
 	<!-- navbar small device -->
 	<div v-if="device === 'sd'" class="navbar-container-sd" :class="{'open-navbar': !isNavbarClosed}" @click="closeNavbar">
 		<div class="navbar-top">
-			<Button as="router-link" to="/dashboard" variant="text">
-				<h2>
-					myMovielist
-				</h2>
-			</Button>
+			<div class="logo">
+				<Button as="router-link" to="/dashboard" variant="text">
+					<h2>
+						myMovielist
+					</h2>
+				</Button>
+			</div>
 		</div>
 
 		<div class="navbar-center">
 			<div class="sign-buttons">
 				<Button as="router-link" to="/sign-in" severity="contrast" variant="outlined">Sign in</Button>
 				
-				<Button as="router-link" to="/sign-up" severity="secondary" variant="outlined">Sign up</Button>
+				<Button as="router-link" to="/sign-up" severity="contrast" variant="outlined">Sign up</Button>
 			</div>
 		</div>
 
@@ -72,7 +76,8 @@ function closeNavbar(e){
 						<Button icon="pi pi-bars" variant="text" @click="isNavbarClosed = true;"></Button>
 					</div>
 
-					<div>
+					<div class="right">
+						<SubmenuUser></SubmenuUser>
 						<ToggleSwitch></ToggleSwitch>
 					</div>
 				</div>
@@ -100,7 +105,6 @@ a {
 	align-items: center;
 	padding: 0 2rem;
 	background-color: var(--navbar-bg-sd);
-	backdrop-filter: blur(8px);
 }
 
 .navbar-container-ld .navbar-left, 
@@ -126,7 +130,7 @@ a {
 	flex-direction: column;
 	justify-content: space-between;
 	background-color: var(--navbar-bg-sd);
-	backdrop-filter: blur(8px);
+	backdrop-filter: blur(20px);
 	z-index: 1000;
 	transform: translate(0, -100%);
 	transition: transform 250ms;
@@ -184,8 +188,13 @@ a {
 	padding: 0 1rem;
 }
 
+.navbar-bottom .right {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+}
+
 .sd-navbar-toggle-button {
-	position: absolute;
 	left: 50%;
 	top: 0;
 	transform: translate(-50%, 0);

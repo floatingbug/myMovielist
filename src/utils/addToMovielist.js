@@ -22,7 +22,7 @@ export async function addToMovielist(param){
 				description: movie.overview,
 				cover: `${IMG_URL_PREFIX}${movie.poster_path}`,
 			},
-			movielistId: movielist.movielistId
+			movielistId: movielist.movielistId,
 		})
 	};
 

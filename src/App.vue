@@ -49,6 +49,7 @@ onMounted(async () => {
 	if(token){
 		const {data, errors} = await getUserFromServer(token);
 
+
 		if(data.value.success){
 			setUser({
 				name: user.name,
