@@ -35,7 +35,7 @@ function handleToggleSwitch(e){
 <template>
 	<ToggleSwitch v-model="checked" @update:modelValue="handleToggleSwitch">
 		<template #handle="{ checked }">
-			<i :class="{'pi pi-sun': !checked, 'pi pi-moon': checked}" style="font-size: 0.8rem;" />
+			<i :class="{'pi pi-sun': !checked, 'pi pi-moon': checked}" style="font-size: 0.8rem; line-height: 0;" />
       	</template>
 	</ToggleSwitch>
 </template>

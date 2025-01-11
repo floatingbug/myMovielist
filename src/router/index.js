@@ -2,10 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import authRoutes from "../views/authorization/router/index.js";
 import footerRoutes from "../components/footer/router/index.js";
 import findMoviesRouts from "../views/findMovies/router/index.js";
+import searchMoviesRoutes from "../views/searchMovies/router/index.js";
 import dashboardRoutes from "../views/dashboard/router/index.js";
 import publicListsRoutes from "../views/publicLists/router/index.js";
 import addMovieListRoutes from "../views/addMovieList/router/index.js";
 import movielistsRoutes from "../views/movielists/router/index.js";
+import homeRoutes from "../views/home/router/index.js";
 
 
 import TestView from "../views/TestView.vue";
@@ -20,6 +22,8 @@ const router = createRouter({
 	  ...publicListsRoutes,
 	  ...addMovieListRoutes,
 	  ...movielistsRoutes,
+	  ...homeRoutes,
+	  ...searchMoviesRoutes,
   ]
 })
 

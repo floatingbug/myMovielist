@@ -26,7 +26,7 @@ function closeNavbar(e){
 	<!-- navbar large device -->
 	<div v-if="device === 'ld'" class="navbar-container-ld">
 		<div class="navbar-left">
-			<Button as="router-link" to="/dashboard" variant="text">
+			<Button as="router-link" to="/" variant="text">
 				<h2>
 					myMovielist
 				</h2>
@@ -38,12 +38,12 @@ function closeNavbar(e){
 	
 		<div class="navbar-right">
 			<div class="links">
-				<Button as="router-link" to="/sign-in" severity="contrast" variant="text">Sign in</Button>
+				<Button as="router-link" to="/sign-in" severity="secondary"  variant="text">Sign in</Button>
 				
-				<Button as="router-link" to="/sign-up" severity="contrast" variant="text">Sign up</Button>
+				<Button as="router-link" to="/sign-up" severity="info" rounded>Sign up</Button>
 			</div>
 
-			<SubmenuUser></SubmenuUser>
+			<SubmenuUser v-if="user.isSignedIn"></SubmenuUser>
 
 			<ToggleSwitch></ToggleSwitch>
 		</div>
@@ -53,7 +53,7 @@ function closeNavbar(e){
 	<div v-if="device === 'sd'" class="navbar-container-sd" :class="{'open-navbar': !isNavbarClosed}" @click="closeNavbar">
 		<div class="navbar-top">
 			<div class="logo">
-				<Button as="router-link" to="/dashboard" variant="text">
+				<Button as="router-link" to="/" variant="text">
 					<h2>
 						myMovielist
 					</h2>
@@ -77,7 +77,7 @@ function closeNavbar(e){
 					</div>
 
 					<div class="right">
-						<SubmenuUser></SubmenuUser>
+						<SubmenuUser v-if="user.isSignedIn"></SubmenuUser>
 						<ToggleSwitch></ToggleSwitch>
 					</div>
 				</div>
@@ -99,12 +99,13 @@ a {
 /* navbar large device */
 .navbar-container-ld {
 	width: 100%;
-	height: 50px;
+	height: 64px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 0 2rem;
-	background-color: var(--navbar-bg-sd);
+	border-bottom: 1px solid var(--navbar-border-color-ld);
+	background-color: var(--navbar-bg-ld);
 }
 
 .navbar-container-ld .navbar-left, 
@@ -161,7 +162,8 @@ a {
 }
 
 .navbar-top {
-	margin-top: 2rem;
+	border-bottom: 1px solid var(--navbar-border-color-ld);
+	background-color: var(--navbar-header-bg);
 }
 
 .user-menu {
@@ -171,6 +173,8 @@ a {
 
 .navbar-bottom {
 	justify-content: space-between;
+	border-top: 1px solid var(--navbar-border-color-ld);
+	background-color: var(--navbar-header-bg);
 }
 
 .navbar-container-sd .sign-buttons {

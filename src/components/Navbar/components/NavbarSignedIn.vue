@@ -38,11 +38,11 @@ function closeNavbar(e){
 	
 		<div class="navbar-right">
 			<div class="links">
-				<Button as="router-link" to="/find-movies" variant="text">Discover Movies</Button>
+				<Button as="router-link" to="/find-movies" severity="contrast" variant="text">Discover Movies</Button>
 				
-				<Button as="router-link" to="/dashboard" variant="text">Search Movies</Button>
+				<Button as="router-link" to="/search-movies" severity="contrast" variant="text">Search Movies</Button>
 				
-				<Button as="router-link" to="/public-lists" variant="text">Public Lists</Button>
+				<Button as="router-link" to="/public-lists" severity="contrast" variant="text">Public Lists</Button>
 			</div>
 
 			<SubmenuUser></SubmenuUser>
@@ -67,7 +67,7 @@ function closeNavbar(e){
 			<div class="sign-buttons">
 				<Button as="router-link" to="/find-movies" severity="contrast" variant="outlined">Discover Movies</Button>
 				
-				<Button as="router-link" to="/dashboard" severity="contrast" variant="outlined">Search Movies</Button>
+				<Button as="router-link" to="/search-movies" severity="contrast" variant="outlined">Search Movies</Button>
 				
 				<Button as="router-link" to="/public-lists" severity="contrast" variant="outlined">Public Lists</Button>
 			</div>
@@ -103,12 +103,13 @@ a {
 /* navbar large device */
 .navbar-container-ld {
 	width: 100%;
-	height: 50px;
+	height: 64px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 0 2rem;
-	background-color: var(--navbar-bg-sd);
+	border-bottom: 1px solid var(--navbar-border-color-ld);
+	background-color: var(--navbar-bg-ld);
 }
 
 .navbar-container-ld .navbar-left, 
@@ -165,7 +166,8 @@ a {
 }
 
 .navbar-top {
-	margin-top: 2rem;
+	border-bottom: 1px solid var(--navbar-border-color-ld);
+	background-color: var(--navbar-header-bg);
 }
 
 .user-menu {
@@ -175,6 +177,8 @@ a {
 
 .navbar-bottom {
 	justify-content: space-between;
+	border-top: 1px solid var(--navbar-border-color-ld);
+	background-color: var(--navbar-header-bg);
 }
 
 .navbar-container-sd .sign-buttons {
