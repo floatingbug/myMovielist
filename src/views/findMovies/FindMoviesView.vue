@@ -12,6 +12,7 @@ import RatingForm from "@/components/RatingForm.vue";
 import {addRating} from "@/utils/addRating.js";
 import {useUser} from "@/store/useUser.js";
 import {determineAverageRating} from "@/utils/determineAverageRating.js";
+import {addMovieToWatchlist} from "@/utils/addMovieToWatchlist.js";
 
 
 const {getUser} = useUser();
@@ -99,6 +100,17 @@ async function handleCardMenuActions(event){
 
 	else if(event.action === "addRating"){
 		ratingMovieId.value = event.data.movieId;
+	}
+
+	else if(event.action === "addMovieToWatchlist"){
+		const {data, errors} = await addMovieToWatchlist({movie: event.data.movie});
+		
+		if(!data.value.success){
+		    toast.add({ severity: 'warn', summary: 'Not added', detail: data.value.msg, life: 3000 });
+			return;
+		}
+		    
+		toast.add({ severity: 'info', summary: 'Added', detail: data.value.msg, life: 3000 });
 	}
 }
 

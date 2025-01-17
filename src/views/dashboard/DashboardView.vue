@@ -1,4 +1,35 @@
 <script setup>
+import {ref, onMounted} from "vue";
+import {getMovielists} from "@/utils/getMovielists.js";
+import {getWatchlist} from "@/utils/getWatchlist.js";
+import Movielists from "./components/Movielists.vue";
+import Watchlist from "./components/Watchlist.vue";
+import Ratings from "./components/Ratings.vue";
+
+
+const publicMovielists = ref([]);
+const privateMovielists = ref([]);
+const watchlist = ref([]);
+
+
+onMounted(async () => {
+	//get movielists
+	const {data: data1, errors: errors1} = await getMovielists();
+
+	console.log(data1.value);
+
+	if(data1.value.success){
+		publicMovielists.value = data1.value.movielists.filter(movielist => movielist.isPublic);
+		privateMovielists.value = data1.value.movielists.filter(movielist => !movielist.isPublic);
+	}
+
+
+	//get watchlist
+	const {data: data2, errors: errors2} = await getWatchlist();
+	
+	watchlist.value = data2.value.watchlist[0];
+	console.log(watchlist.value);
+});
 </script>
 
 
@@ -8,17 +39,33 @@
 	</header>
 
 	<main>
-		<div class="playlists">
-			<div class="private-playlists">
-				<h1>
-					Private playlists
-				</h1>
+		<div class="movielists-container">
+			<div class="private-movielists-container">
+				<h1>Private Movielists</h1>
+
+				<div class="private-movielists">
+					<Movielists :movielists="privateMovielists"></Movielists>
+				</div>
 			</div>
 
-			<div class="public-playlists">
-				<h1>
-					Public playlists
-				</h1>
+			<div class="public-movielists-container">
+				<h1>Public Movielists</h1>
+
+				<div class="public-movielists">
+					<Movielists :movielists="publicMovielists"></Movielists>
+				</div>
+			</div>
+		</div>
+
+		<div class="watchlist-ratings-container">
+			<div class="watchlist">
+				<h1>Watchlist</h1>
+
+				<Watchlist :watchlist="watchlist"></Watchlist>
+			</div>
+
+			<div class="ratings">
+				<Ratings></Ratings>
 			</div>
 		</div>
 	</main>
@@ -27,28 +74,57 @@
 
 <style scoped>
 header {
-	height: 200px;
+	width: 100%;
+	min-height: 20dvh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 
 	h1 {
-		font-size: 3rem; 
-		color: var(--p-primary-color);
+		font-size: 3rem;
 	}
 }
 
-.playlists {
+main {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4rem;
+}
+
+.movielists-container, .watchlist-ratings-container {
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-	gap: 3rem;
+	gap: 2rem;
+}
 
-	.private-playlists, .public-playlists {
-		h1 {
-			font-size: 2rem;
-		}
-	}
+.private-movielists-container, .public-movielists-container, .watchlist, .ratings {
+	width: 95%;
+	min-width: 280px;
+	max-width: 650px;
+	height: 300px;
+	flex: 0.35 1 280px;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	padding: 1rem;
+	border-radius: var(--border-radius-soft);
+	border: 1px solid var(--card-border-color);
+	background-color: var(--card-bg);
+}
+
+.private-movielists, .public-movielists {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	overflow: auto;
+	padding: 1rem;
+	border-radius: var(--border-radius-hard);
+	border: 1px solid var(--card-border-color-light);
 }
 </style>

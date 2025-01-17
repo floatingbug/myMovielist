@@ -37,6 +37,14 @@ const menuActions = {
 			});
 		}
 	},
+	addMovieToWatchlist: function(){
+		emit("cardMenu:action", {
+			action: "addMovieToWatchlist",
+			data: {
+				movie: props.movie
+			}
+		});
+	},
 	addRating: function() {
 		emit("cardMenu:action", {
 			action: "addRating",
@@ -73,7 +81,8 @@ const items = ref([
 	},
 	{
 		label: 'Add to watchlist',
-		icon: 'pi pi-bookmark-fill'
+		icon: 'pi pi-bookmark-fill',
+		command: menuActions.addMovieToWatchlist
 	},
 	{
 		label: 'Add rating',

@@ -72,6 +72,7 @@ function handleMenuActions(event){
 	display: flex;
 	flex-direction: column;
 	border-radius: 8px;
+	border: 1px solid var(--card-border-color);
 	background-color: var(--card-bg);
 }
 

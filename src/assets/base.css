@@ -3,22 +3,52 @@
 	--navbar-bg-ld: rgb(from var(--p-surface-300) r g b / 20%);
 	--navbar-header-bg: rgb(from var(--p-surface-900) r g b / 50%);
 	--navbar-border-color-ld: var(--p-sky-300);
-	--card-bg: rgb(from var(--p-surface-400) r g b / 20%);
+
+	--card-bg: rgb(from var(--p-surface-100) r g b / 30%);
+	--card-border-color: rgb(from var(--p-primary-900) r g b / 70%);
+	--card-border-color-light: rgb(from var(--p-primary-900) r g b / 30%);
+
+	--border-color: rgb(from var(--p-primary-900) r g b / 15%);
+
 	--movielist-bg: rgb(from var(--p-surface-200) r g b / 50%);
 	--movie-bg: rgb(from var(--p-surface-200) r g b / 50%);
-	--overlay-bg: rgb(from var(--p-surface-700) r g b / 20%);
+
+	--overlay-bg: rgb(from var(--p-surface-700) r g b / 10%);
+
 	--progress-spinner-bg: rgb(from var(--p-surface-700) r g b / 80%);
+
 	--surface-bg: var(--p-surface-200);
+
+	--border-radius-hard: 4px;
+	--border-radius-soft: 8px;
+	--border-radius-rounded: 30px;
+
+	--scrollbar-track-color: var(--p-surface-300);
+	--scrollbar-handle-color: var(--p-surface-500);
+	--scrollbar-handle-hover-color: var(--p-surface-700);
 }
 
 .dark-mode {
 	--navbar-bg-sd: rgb(from var(--p-surface-900) r g b / 50%);
 	--navbar-bg-ld: rgb(from var(--p-surface-800) r g b / 50%);
 	--navbar-border-color-ld: rgb(from var(--p-sky-300) r g b / 30%);
+
 	--card-bg: rgb(from var(--p-surface-700) r g b / 20%);
+	--card-border-color: rgb(from var(--p-primary-500) r g b / 50%);
+	--card-border-color-light: rgb(from var(--p-primary-500) r g b / 30%);
+	
+	--border-color: rgb(from var(--p-primary-300) r g b / 10%);
+
 	--movielist-bg: rgb(from var(--p-surface-700) r g b / 20%);
 	--movie-bg: rgb(from var(--p-surface-700) r g b / 20%);
+
 	--overlay-bg: rgb(from var(--p-surface-700) r g b / 20%);
+
 	--progress-spinner-bg: rgb(from var(--p-surface-700) r g b / 80%);
+
 	--surface-bg: var(--p-surface-900);
+	
+	--scrollbar-track-color: var(--p-surface-700);
+	--scrollbar-handle-color: var(--p-surface-400);
+	--scrollbar-handle-hover-color: var(--p-surface-300);
 }
