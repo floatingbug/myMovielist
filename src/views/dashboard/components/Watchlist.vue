@@ -3,7 +3,6 @@ const props = defineProps({
 	watchlist: Object
 });
 
-console.log(props.watchlist);
 </script>
 
 

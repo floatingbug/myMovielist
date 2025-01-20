@@ -2,6 +2,7 @@
 import {ref, onMounted} from "vue";
 import {getMovielists} from "@/utils/getMovielists.js";
 import {getWatchlist} from "@/utils/getWatchlist.js";
+import {getRatings} from "@/utils/getRatings.js";
 import Movielists from "./components/Movielists.vue";
 import Watchlist from "./components/Watchlist.vue";
 import Ratings from "./components/Ratings.vue";
@@ -10,13 +11,12 @@ import Ratings from "./components/Ratings.vue";
 const publicMovielists = ref([]);
 const privateMovielists = ref([]);
 const watchlist = ref([]);
+const ratings = ref([]);
 
 
 onMounted(async () => {
 	//get movielists
 	const {data: data1, errors: errors1} = await getMovielists();
-
-	console.log(data1.value);
 
 	if(data1.value.success){
 		publicMovielists.value = data1.value.movielists.filter(movielist => movielist.isPublic);
@@ -26,9 +26,11 @@ onMounted(async () => {
 
 	//get watchlist
 	const {data: data2, errors: errors2} = await getWatchlist();
-	
 	watchlist.value = data2.value.watchlist[0];
-	console.log(watchlist.value);
+
+	//get ratings
+	const {data: data3, errors: errors3} = await getRatings();
+	ratings.value = data3.value.ratings;
 });
 </script>
 
@@ -65,7 +67,9 @@ onMounted(async () => {
 			</div>
 
 			<div class="ratings">
-				<Ratings></Ratings>
+				<h1>Ratings</h1>
+
+				<Ratings :ratings="ratings"></Ratings>
 			</div>
 		</div>
 	</main>
