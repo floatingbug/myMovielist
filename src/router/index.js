@@ -8,6 +8,7 @@ import publicListsRoutes from "../views/publicLists/router/index.js";
 import addMovieListRoutes from "../views/addMovieList/router/index.js";
 import movielistsRoutes from "../views/movielists/router/index.js";
 import homeRoutes from "../views/home/router/index.js";
+import movieViewRoutes from "../views/movieView/router/index.js";
 
 
 import TestView from "../views/TestView.vue";
@@ -24,6 +25,7 @@ const router = createRouter({
 	  ...movielistsRoutes,
 	  ...homeRoutes,
 	  ...searchMoviesRoutes,
+	  ...movieViewRoutes,
   ]
 })
 

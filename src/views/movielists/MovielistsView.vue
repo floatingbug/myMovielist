@@ -6,6 +6,8 @@ import Movielist from "./components/Movielist.vue";
 import ProgressSpinner from "@/components/ProgressSpinner.vue";
 import {deleteMovielist} from "./helpers/deleteMovielist.js";
 import {useToast} from "primevue/usetoast";
+import Watchlist from "./components/Watchlist.vue";
+import {getWatchlist} from "@/utils/getWatchlist.js";
 
 
 const {getUser} = useUser();
@@ -14,11 +16,16 @@ const isInitialized = ref(false);
 const movielists = ref([]);
 const isProcessing = ref(false);
 const toast = useToast();
+const watchlist = ref([]);
 
 
 onMounted(async () => {
 	//store movielists in user store (user.movielists)
 	await getMovielists();
+
+	//get watchlist
+	const {data, errors} = await getWatchlist();
+	watchlist.value = data.value.watchlist[0].movies;
 
 	isInitialized.value = true;
 });
@@ -57,27 +64,33 @@ async function handleMenuActions(eventData){
 		<h1>Movielists</h1>
 	</header>
 
-	<main>
-		<div class="movielists-container">
-			<div class="movielists-content">
-				<Movielist v-if="isInitialized" v-for="movielist in user.movielists" :movielist="movielist" @menu:action="handleMenuActions"></Movielist>
-			</div>
+	<div class="movielists-container">
+		<div class="movielists-content">
+			<Movielist v-if="isInitialized" v-for="movielist in user.movielists" :movielist="movielist" @menu:action="handleMenuActions"></Movielist>
 		</div>
-	</main>
+	</div>
+	
+	<header>
+		<h1>Watchlist</h1>
+	</header>
 
-	<footer></footer>
+	<div v-if="isInitialized" class="watchlist-container">
+		<div class="watchlist-content">
+			<Watchlist :watchlist="watchlist"></Watchlist>
+		</div>
+	</div>
 </template>
 
 
 <style scoped>
-.movielists-container {
+.movielists-container, .watchlist-container {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.movielists-content {
+.movielists-content, .watchlist-content {
 	width: 90%;
 	min-width: 280px;
 	display: flex;

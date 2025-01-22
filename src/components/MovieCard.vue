@@ -44,8 +44,10 @@ function handleMenuActions(event){
 		
 		<main>
 			<div v-if="props.movie.averageRating" class="rating">
-				<span>User Rating:&nbsp;</span>
-				<CardRating :rating="movie.averageRating"></CardRating>
+				<Button as="router-link" :to="`/movie-view?movieId=${movie.id}`" variant="text">
+					<span>User Ratings:&nbsp;</span>
+					<CardRating :rating="movie.averageRating"></CardRating>
+				</Button>
 			</div>
 		
 			<div v-else class="no-rating-yet">
@@ -57,7 +59,7 @@ function handleMenuActions(event){
 		
 		<footer>
 			<div class="movie-name">
-				{{movie.title}}
+				<Button as="router-link" :to="`/movie-view?movieId=${movie.id}`" :label="movie.title" variant="text"></Button>
 			</div>
 		</footer>
 	</div>

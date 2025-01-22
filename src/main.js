@@ -11,6 +11,9 @@ import {definePreset} from "@primevue/themes";
 import semantic from "./theme/semantic.js";
 import ToastService from "primevue/toastservice";
 import Toast from "primevue/toast";
+import Divider from 'primevue/divider';
+import Rating from "primevue/rating";
+
 
 const custom_preset = definePreset(Aura, {
 	semantic,
@@ -31,5 +34,7 @@ app.use(PrimeVue, {
 
 app.component("Button", Button);
 app.component("Toast", Toast);
+app.component("Divider", Divider);
+app.component("Rating", Rating);
 
 app.mount('#app')

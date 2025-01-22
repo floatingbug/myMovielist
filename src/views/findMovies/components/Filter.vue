@@ -103,7 +103,11 @@ function handleGenreButton(button){
 }
 
 .p-button.button-active {
-	background-color: var(--p-button-secondary-active-background);
+    background-color: var(--p-button-secondary-active-background);
+}
+
+.p-button.button-active:hover {
+    background-color: var(--p-button-secondary-active-background) !important;
 }
 
 .search-button {
