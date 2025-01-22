@@ -94,12 +94,12 @@ onMounted(async () => {
 						<span>Altogether: {{movie.customizedData.length}} Ratings</span>
 					</div>
 				</div>
-
+		
 				<div class="chart-rating-container">
 					<ChartRating v-for="(percent, index) in ratingsPercent" :percent="percent" :stars="index+1"></ChartRating>
 				</div>
 			</div>
-
+			
 			<div class="right">
 				<div class="user-ratings">
 					<UserRating v-for="(userRating, index) in customizedData" :userRating="userRating" :stars="userRating.rating"></UserRating>
@@ -187,6 +187,7 @@ onMounted(async () => {
 
 .bottom-container {
 	width: 90%;
+	max-width: 1200px;
 	display: flex;
 
 	.left, .right {
@@ -216,12 +217,25 @@ onMounted(async () => {
 
 
 @media(max-width: 1000px){
+	.top-container {
+		flex-direction: column;
+
+		.right {
+			align-items: flex-start;
+		}
+	}
+
 	.top {
 		flex-direction: column;
 
 		.right {
 			align-items: flex-start;
 		}
+	}
+
+	.bottom-container {
+		flex-direction: column;
+		gap: 4rem;
 	}
 }
 </style>

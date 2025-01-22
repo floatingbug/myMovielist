@@ -7,7 +7,7 @@ export function getRatingsByPercent(ratingsByStars){
 	}
 
 	for(let key in ratingsByStars.value){
-		ratingsByPercent.push((ratingsByStars.value[key] / numberOfRatings) * 100);
+		ratingsByPercent.push(Math.round(((ratingsByStars.value[key] / numberOfRatings) * 100) * 10) / 10);
 	}
 
 	return ratingsByPercent;
