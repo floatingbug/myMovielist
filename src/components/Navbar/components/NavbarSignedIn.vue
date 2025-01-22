@@ -38,6 +38,8 @@ function closeNavbar(e){
 	
 		<div class="navbar-right">
 			<div class="links">
+				<Button as="router-link" to="/dashboard" severity="contrast" variant="text">Dashboard</Button>
+				
 				<Button as="router-link" to="/find-movies" severity="contrast" variant="text">Discover Movies</Button>
 				
 				<Button as="router-link" to="/search-movies" severity="contrast" variant="text">Search Movies</Button>
@@ -65,11 +67,13 @@ function closeNavbar(e){
 
 		<div class="navbar-center">
 			<div class="sign-buttons">
-				<Button as="router-link" to="/find-movies" severity="contrast" variant="outlined">Discover Movies</Button>
+				<Button as="router-link" to="/dashboard" severity="secondary">Dashboard</Button>
+
+				<Button as="router-link" to="/find-movies" severity="secondary">Discover Movies</Button>
 				
-				<Button as="router-link" to="/search-movies" severity="contrast" variant="outlined">Search Movies</Button>
+				<Button as="router-link" to="/search-movies" severity="secondary">Search Movies</Button>
 				
-				<Button as="router-link" to="/public-lists" severity="contrast" variant="outlined">Public Lists</Button>
+				<Button as="router-link" to="/public-lists" severity="secondary">Public Lists</Button>
 			</div>
 		</div>
 

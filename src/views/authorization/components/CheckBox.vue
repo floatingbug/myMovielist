@@ -23,7 +23,10 @@ function handleCheckbox(e){
 	<div class="content">
 		<Checkbox v-model="checked" binary inputId="accept" @update:modelValue="handleCheckbox" />
 		<label for="accept">
-			I've read and accept the <a href="/terms-of-use">terms of use</a> and the <a href="/privacy-policy">privacy policy</a>.
+			I've read and accept the 
+			<Button as="router-link" to="/terms-of-use" variant="text">terms of use</Button>
+			and the 
+			<Button as="router-link" to="/privacy-policy" variant="text">privacy policy</Button>.
 		</label>
 	</div>
 </template>
@@ -32,6 +35,13 @@ function handleCheckbox(e){
 <style scoped>
 .content {
 	display: flex;
+	align-items: flex-start;
 	gap: 1rem;
+}
+
+label {
+	.p-button {
+		padding: 0;
+	}
 }
 </style>

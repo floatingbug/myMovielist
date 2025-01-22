@@ -63,9 +63,9 @@ function closeNavbar(e){
 
 		<div class="navbar-center">
 			<div class="sign-buttons">
-				<Button as="router-link" to="/sign-in" severity="contrast" variant="outlined">Sign in</Button>
+				<Button as="router-link" to="/sign-in" severity="secondary" >Sign in</Button>
 				
-				<Button as="router-link" to="/sign-up" severity="contrast" variant="outlined">Sign up</Button>
+				<Button as="router-link" to="/sign-up"  >Sign up</Button>
 			</div>
 		</div>
 

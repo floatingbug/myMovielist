@@ -30,11 +30,11 @@ onMounted(async () => {
 	if(isSignedIn === true || isSignedIn === "true") setUserSettings({isSignedIn: true});
 
 	//handle device
-	if(window.innerWidth >= 1000) device.value = "ld";
+	if(window.innerWidth >= 1050) device.value = "ld";
 	else device.value = "sd";
 
 	window.addEventListener("resize", (e) => {
-		if(window.innerWidth >= 1000) device.value = "ld";
+		if(window.innerWidth >= 1050) device.value = "ld";
 		else device.value = "sd";
 	});
 
