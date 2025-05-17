@@ -7,6 +7,8 @@ import App from './App.vue'
 import router from './router'
 import PrimeVue from "primevue/config";
 import Aura from '@primeuix/themes/aura';
+import { definePreset } from '@primeuix/themes';
+import semantic from "./theming/semantic.js";
 import Button from "primevue/button";
 import Divider from "primevue/divider";
 import Dialog from "primevue/dialog";
@@ -20,12 +22,16 @@ import ToastService from 'primevue/toastservice';
 
 const app = createApp(App)
 
+const MyPreset = definePreset(Aura, {
+	semantic,
+});
+
 
 app.use(router)
 app.use(ToastService);
 app.use(PrimeVue, {
 	theme: {
-		preset: Aura,
+		preset: MyPreset,
 	}
 });
 

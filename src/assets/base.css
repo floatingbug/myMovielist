@@ -5,13 +5,19 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--navbar-bg: rgb(from var(--p-primary-color) r g b / 20%);
+		--navbar-bg: rgb(from var(--p-surface-500) r g b / 20%);
+		--p-primary-color: var(--p-primary-400) !important;
+		--contrast-color: var(--p-sky-400);
+		--background-color: rgb(from var(--p-surface-800) r g b / 100%);
+		--card-bg-glass: rgb(from var(--p-surface-500) r g b / 20%);
+		--movie-card-head-bg: rgb(from var(--p-surface-900) r g b / 80%);
+		--movie-card-footer-bg: rgb(from var(--p-surface-900) r g b / 80%);
+		--surface-1: rgb(from var(--p-surface-900) r g b / 80%);
 	}
 }
 
 body {
   min-height: 100vh;
-  line-height: 1.6;
   font-family:
     Inter,
     -apple-system,
@@ -29,4 +35,6 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+	
+  background-color: var(--background-color);
 }

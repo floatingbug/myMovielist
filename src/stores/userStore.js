@@ -2,12 +2,12 @@ import {reactive} from "vue";
 
 
 const user = reactive({
-	name: "test_user",
-	isSignedIn: true,
+	name: "user",
 	jwt: "1",
+	isSignedIn: true,
 });
 
 
-export default function(){
+export default function useUser(){
 	return {user};
 }
