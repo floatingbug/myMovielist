@@ -7,6 +7,7 @@ const props = defineProps({
 	rating: Object,
 });
 
+
 </script>
 
 
@@ -14,18 +15,25 @@ const props = defineProps({
 	<div class="rating">
 		<div class="rating__stars">
 			<Rating 
-				v-model="value"
+				v-model="rating.value"
 				readonly
 			/>
 
-			<div>
-				<span>created by: </span>
-				<span>on: </span>
+			<div class="rating__meta-info">
+				<div>created by: {{rating.rater}},</div>
+				<div>on: {{rating.dateString}}</div>
 			</div>
 		</div>
 
-		<div class="rating__comment">
+		<div class="rating__title">
+			{{rating.title}}
 		</div>
+
+		<div class="rating__comment">
+			{{rating.comment}}
+		</div>
+
+		<Divider></Divider>
 	</div>
 </template>   
 
@@ -34,10 +42,26 @@ const props = defineProps({
 .rating {
 }
 
-.rating__stars {
-}
-
 .rating__stars :deep(.p-rating-on-icon) {
 	color: var(--contrast-color);
+}
+
+.rating__meta-info {
+	margin-top: 0.4rem;
+
+	:last-child {
+		margin-top: 0.2rem;
+	}
+}
+
+.rating__title {
+	font-size: 1.2rem;
+	font-weight: 800;
+
+	margin-top: 1rem;
+}
+
+.rating__comment {
+	margin-top: 0.5rem;
 }
 </style>

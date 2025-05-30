@@ -22,85 +22,90 @@ function closeMenu(event){
 
 
 <template>    
-	<nav 
+	<div 
 		class="menu"
 	>
 		<!-- user signed in -->
 		<Button
 			class="menu__bars-button menu__bars-button--open"
-			v-if="device.displaySize < 1024 && !isMenuOpen"
+			v-if="device.displaySize < 1024"
 			variant="text"
-			@click="isMenuOpen = true;"
+			@click="isMenuOpen = !isMenuOpen;"
 		>
 			<i class="pi pi-bars"/>
 		</Button>
-
+		
 		<div 
-			class="menu__content"
-			:class="isMenuOpen ? '' : 'menu__content-closed'"
-			v-if="user.isSignedIn" 
-			@click="closeMenu"
+			class="menu__user-list-button"
+			v-if="device.displaySize < 1024"
 		>
-
-			<div class="menu__head">
-				<Button
-					class="menu__bars-button"
-					v-if="device.displaySize < 1024"
-					variant="text"
-					@click="isMenuOpen = false;"
-				>
-					<i class="pi pi-bars"/>
-				</Button>
-				
-				<MenuUserList />
-			</div>
-
-			<ul class="menu__items">
-				<li class="menu__item"
-					v-for="(item, index) in menuItems"
-				>
-					<MenuButton 
-						:url="item.url"
-						:label="item.label"
-					/>
-				</li>
-			</ul>
-			
+			<MenuUserList 
+			/>
 		</div>
 
-
-
-		<!-- user not signed in -->
+	</div>
+	
+	<div 
+		class="menu__content"
+		:class="isMenuOpen ? '' : 'menu__content-closed'"
+		v-if="user.isSignedIn" 
+		@click="closeMenu"
+	>
+		<ul class="menu__items">
+			<li class="menu__item"
+				v-for="(item, index) in menuItems"
+			>
+				<MenuButton 
+					:url="item.url"
+					:label="item.label"
+				/>
+			</li>
+		</ul>
+		
 		<div 
-			class="menu__content"
-			v-if="!user.isSignedIn" 
+			class="menu__user-list-button"
+			v-if="device.displaySize >= 1024"
 		>
-			<div class="menu__logo">
-				myMovielist
-			</div>
-
-			<div  class="menu__auth">
-				<Button 
-				>
-					Sign in
-				</Button>
-			
-				<Button
-				>
-					Sign up
-				</Button>
-			</div>
+			<MenuUserList />
 		</div>
-	</nav>
+	</div>
+
+
+
+	<!-- user not signed in -->
+	<div 
+		class="menu__content"
+		v-if="!user.isSignedIn" 
+	>
+		<div class="menu__logo">
+			myMovielist
+		</div>
+
+		<div  class="menu__auth">
+			<Button 
+			>
+				Sign in
+			</Button>
+		
+			<Button
+			>
+				Sign up
+			</Button>
+		</div>
+	</div>
 </template>   
 
 
 <style scoped>
 .menu {
 	width: 100%;
-	height: auto;
+	height: 50px;
 	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	z-index: 1000;
+	border-bottom: 1px solid var(--navbar-border-color);
 	background-color: var(--navbar-bg);
 	backdrop-filter: blur(8px);
 }
@@ -108,17 +113,20 @@ function closeMenu(event){
 .menu__content {
 	width: 100%;
 	height: 100dvh;
+	position: fixed;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 0.5rem 1rem;
+	margin-top: 50px;
 	background-color: var(--navbar-bg);
 	backdrop-filter: blur(8px);
 	transition: transform 250ms;
+	z-index: 1000;
 }
 
 .menu__content-closed {
-	transform: translateY(-100%);
+	transform: translateY(calc(-100% - 50px));
 }
 
 .menu__head {
@@ -131,9 +139,6 @@ function closeMenu(event){
 }
 
 .menu__bars-button {
-	height: auto;
-	position: absolute;
-	padding-bottom: 0;
 	z-index: 1000;
 
 	i {
@@ -165,6 +170,10 @@ function closeMenu(event){
 	margin-left: auto;
 }
 
+.menu__user-list-button {
+	margin-right: 0.7rem;
+}
+
 @media(min-width: 768px) {
 	.menu__content {
 		width: 50%;
@@ -172,14 +181,6 @@ function closeMenu(event){
 	
 	.menu__content-closed {
 		transform: translateX(-100%);
-	}
-
-	.menu__bars-button--open {
-		padding: 1.5rem;
-
-		i {
-			font-size: 2rem;
-		}
 	}
 	
 	.menu__bars-button {
@@ -190,10 +191,16 @@ function closeMenu(event){
 }
 
 @media(min-width: 1024px) {
+	.menu {
+		height: 0;
+	}
+
 	.menu__content {
 		width: 100%;
 		height: auto;
 		flex-direction: row;
+		justify-content: space-between;
+		margin: 0;
 	}
 	
 	.menu__content-closed {
@@ -206,6 +213,10 @@ function closeMenu(event){
 
 	.menu__items {
 		flex-direction: row;
+		margin: 0;
+	}
+
+	.menu__user-list-button {
 		margin: 0;
 	}
 }

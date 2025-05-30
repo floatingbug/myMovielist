@@ -7,7 +7,7 @@ const emit = defineEmits(["createRating:action"]);
 
 
 const userRating = reactive({
-	rating: 1,
+	value: 1,
 	title: "",
 	comment: "",
 });
@@ -16,8 +16,14 @@ const userRating = reactive({
 function emitRating(){
 	emit("createRating:action", {
 		action: "newRating",
-		newRating: toRaw(userRating),
+		data: {
+			newRating: toRaw(userRating),
+		}
 	});
+
+	userRating.value = 1;
+	userRating.title = "";
+	userRating.comment = "";
 }
 
 </script>
@@ -26,7 +32,7 @@ function emitRating(){
 <template>    
 	<div class="create-rating">
 		<Rating
-			v-model="userRating.rating"
+			v-model="userRating.value"
 		/>
 
 		<InputGroup>
@@ -56,6 +62,10 @@ function emitRating(){
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+}
+
+.create-rating :deep(.p-rating-on-icon) {
+	color: var(--contrast-color);
 }
 
 .p-textarea {

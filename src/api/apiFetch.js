@@ -4,7 +4,7 @@ import useUser from "@/stores/userStore.js";
 const {user} = useUser();
 
 
-export default async function({path, options, addJwt = false}){
+export default async function apiFetch({path, options, addJwt = false}){
 	if(addJwt){
 		options.headers.authorization = user.jwt;
 	}

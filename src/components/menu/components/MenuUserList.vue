@@ -22,7 +22,6 @@ function toggle(event){
 	>
 		<i 
 			class="pi pi-user"
-			style="font-size: 1.2rem;"
 		/>
 	</Button>
 
@@ -31,8 +30,7 @@ function toggle(event){
 
 
 <style scoped>
-.menu__user-button {
-	margin-left: auto;
-	background-color: var(--contrast-color);
+.user__button-container {
+	padding: 1rem;
 }
 </style>

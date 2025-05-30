@@ -1,12 +1,12 @@
 import apiFetch from "@/api/apiFetch.js";
 
 
-export default async function getMovieById({movieId}){
-	const path = `/movie/get-by-id?movieId=${movieId}`;
+export default async function getMoviesAPI({query}){
+	const path = `/movie${query}`;
 	const options = {
 		method: "GET",
 		headers: {},
-	};
+	}
 
 	const result = await apiFetch({
 		path,
@@ -14,5 +14,5 @@ export default async function getMovieById({movieId}){
 		addJwt: true,
 	});
 
-	return result.data;
+	return result;
 }

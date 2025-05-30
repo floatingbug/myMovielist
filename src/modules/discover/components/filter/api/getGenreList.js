@@ -1,8 +1,8 @@
 import apiFetch from "@/api/apiFetch.js";
 
 
-export default async function getRatings({movieId}){
-	const path = `/rating?movieid=${movieId}`;
+export default async function getGenreList(){
+	const path = "/movie/get-genre-list";
 	const options = {
 		method: "GET",
 	};
@@ -12,5 +12,5 @@ export default async function getRatings({movieId}){
 		options,
 	});
 
-	return result.data;
+	return result.data.genres;
 }

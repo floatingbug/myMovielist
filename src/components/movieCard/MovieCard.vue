@@ -1,4 +1,8 @@
 <script setup>
+import RatingSummarized from "@/components/rating/RatingSummarized.vue";
+import Chip from "primevue/chip";
+
+
 const props = defineProps({
 	movie: Object,
 });
@@ -22,6 +26,26 @@ const props = defineProps({
 			</div>
 
 			<div class="movie-card__footer">
+				<div class="movie-card__footer-top">
+					<div class="movie-card__footer-rating">
+						<RatingSummarized :ratings="movie.ratings" />
+						<div v-if="!movie.ratings">No ratings yet.</div>
+					</div>
+
+					<div class="movie-card__footer-fsk">FSK: {{movie.fsk}}</div>
+				</div>
+				
+				<span
+					class="movie-card__footer-watchlist"
+					v-if="movie.isInWatchlist"
+				>
+					In Watchlist
+				</span>
+
+				<div class="movie-card__footer-release-date">
+					<span>Release: </span>
+					<span>{{movie.release_date}}</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -31,7 +55,7 @@ const props = defineProps({
 <style scoped>
 .movie-card__container {
 	min-width: 100px;
-	height: 350px;
+	height: 400px;
 }
 
 .movie-card__content {
@@ -74,11 +98,23 @@ const props = defineProps({
 
 .movie-card__footer {
 	width: 100%;
-	height: 20%;
+	height: 30%;
 	position: absolute;
 	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 0.5rem 1rem;
 	background-color: var(--movie-card-footer-bg);
 	backdrop-filter: blur(8px);
 }
 
+.movie-card__footer-top {
+	display: flex;
+	justify-content: space-between;
+}
+
+.movie-card__footer-watchlist {
+	color: var(--contrast-color);
+}
 </style>
