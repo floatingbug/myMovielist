@@ -5,11 +5,13 @@ import FilterGenres from "./components/FilterGenres.vue";
 import Filter from "./helpers/Filter.js";
 import getMoviesAPI from "./api/getMoviesAPI.js";
 import createQuery from "./helpers/createQuery.js";
-import useMovieStore from "../../stores/movieStore.js";
+import useDiscoverMovieStore from "@/stores/useDiscoverMovieStore.js";
 import systemStatus from "@/composables/systemStatus.js";
+import useFilterStore from "@/stores/useFilterStore.js";
 
 
-const {movieStoreMovies, movieStoreMetaData} = useMovieStore();
+const filterStore = useFilterStore();
+const {movieStoreMovies, movieStoreCurrMovies, movieStoreMetaData} = useDiscoverMovieStore();
 const isDrawerVisible = ref(false);
 const filterObj = {
 	genreList: [],
@@ -35,8 +37,11 @@ async function applyFilter(){
 
 	const result = await getMoviesAPI({query});
 	movieStoreMovies.value = result.data.results;
+	movieStoreCurrMovies.value = movieStoreMovies.value;
 	const {results, ...metaData} = result.data;
 	movieStoreMetaData.value = metaData;
+
+	filterStore.query = query.slice(1);
 
 	systemStatus.value.isLoading = false;
 }

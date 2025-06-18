@@ -1,10 +1,25 @@
 <script setup>
 import {ref} from "vue";
+import {useRouter} from "vue-router";
 import TieredMenu from 'primevue/tieredmenu';
-import userMenuItems from "../data/userMenuItems.js";
+import useUserStore from "@/stores/userStore.js";
 
 
+const router = useRouter();
+const {unsetUser} = useUserStore();
 const menu = ref();
+const userMenuItems = ref([
+	{
+		label: "Logout",
+		command(){
+			localStorage.removeItem("jwt");
+			localStorage.setItem("isSignedIn", false);
+
+			unsetUser();
+			router.push("/");
+		},
+	},
+]);
 
 
 function toggle(event){

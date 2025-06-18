@@ -2,10 +2,10 @@
 import {ref, onMounted, toRaw} from "vue";
 import Chip from "primevue/chip";
 import getGenreList from "../api/getGenreList.js";
-import useMovieStore from "../../../stores/movieStore.js";
+import useDiscoverMovieStore from "@/stores/useDiscoverMovieStore.js";
 
 
-const {genreList} = useMovieStore();
+const {genreList} = useDiscoverMovieStore();
 const selectedGenres = ref(null);
 
 

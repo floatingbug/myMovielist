@@ -28,7 +28,7 @@ function closeMenu(event){
 		<!-- user signed in -->
 		<Button
 			class="menu__bars-button menu__bars-button--open"
-			v-if="device.displaySize < 1024"
+			v-if="device.displaySize < 1024 && user.isSignedIn"
 			variant="text"
 			@click="isMenuOpen = !isMenuOpen;"
 		>
@@ -40,6 +40,7 @@ function closeMenu(event){
 			v-if="device.displaySize < 1024"
 		>
 			<MenuUserList 
+				v-if="user.isSignedIn"
 			/>
 		</div>
 
@@ -74,7 +75,7 @@ function closeMenu(event){
 
 	<!-- user not signed in -->
 	<div 
-		class="menu__content"
+		class="menu__content-not-signed-in"
 		v-if="!user.isSignedIn" 
 	>
 		<div class="menu__logo">
@@ -83,11 +84,16 @@ function closeMenu(event){
 
 		<div  class="menu__auth">
 			<Button 
+				as="router-link"
+				to="/auth/sign-in"
+				variant="text"
 			>
 				Sign in
 			</Button>
 		
 			<Button
+				as="router-link"
+				to="/auth/sign-up"
 			>
 				Sign up
 			</Button>
@@ -123,6 +129,21 @@ function closeMenu(event){
 	backdrop-filter: blur(8px);
 	transition: transform 250ms;
 	z-index: 1000;
+}
+
+.menu__content-not-signed-in {
+	width: 100%;
+	height: 50px;
+	position: fixed;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 1rem;
+	z-index: 1001;
+
+	.menu__logo {
+		font-size: 1rem;
+	}
 }
 
 .menu__content-closed {
@@ -168,6 +189,10 @@ function closeMenu(event){
 	display: flex;
 	gap: 1rem;
 	margin-left: auto;
+
+	.p-button {
+		text-decoration: none;
+	}
 }
 
 .menu__user-list-button {
@@ -191,10 +216,6 @@ function closeMenu(event){
 }
 
 @media(min-width: 1024px) {
-	.menu {
-		height: 0;
-	}
-
 	.menu__content {
 		width: 100%;
 		height: auto;

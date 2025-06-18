@@ -9,7 +9,7 @@ export default async function handleWatchlist(event){
 			movieId: event.data.movieId,
 		});
 
-		return result;
+		return "movieAdded";
 	}
 
 	// remove movie from watchlist

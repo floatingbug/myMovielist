@@ -29,7 +29,6 @@ const props = defineProps({
 				<div class="movie-card__footer-top">
 					<div class="movie-card__footer-rating">
 						<RatingSummarized :ratings="movie.ratings" />
-						<div v-if="!movie.ratings">No ratings yet.</div>
 					</div>
 
 					<div class="movie-card__footer-fsk">FSK: {{movie.fsk}}</div>

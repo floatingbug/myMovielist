@@ -1,9 +1,9 @@
 import {ref} from "vue";
 
 
-const useSystemStatus = ref({
+const systemStatus = ref({
 	isLoading: false,
 });
 
 
-export default useSystemStatus;
+export default systemStatus;

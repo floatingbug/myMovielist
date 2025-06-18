@@ -11,8 +11,12 @@ import useMovieStore from "./stores/movieStore.js";
 import { useToast } from 'primevue/usetoast';
 import AddToWatchlistButton from "@/components/addToWatchlistButton/AddToWatchlistButton.vue";
 import AddToMovielistMenu from "@/components/addToMovielistMenu/AddToMovielistMenu.vue";
+import createMovielistAPI from "./api/createMovielistAPI.js";
+import addMovieToMovielistAPI from "./api/addMovieToMovielistAPI.js";
+import useDiscoverMovieStore from "@/stores/useDiscoverMovieStore.js";
 
 
+const {movieStoreMovies} = useDiscoverMovieStore();
 const {movie} = useMovieStore();
 const route = useRoute();
 const toast = useToast();
@@ -23,7 +27,7 @@ let movieId = 0;
 
 onMounted(async () => {
 	// get movie
-	movieId = route.query.movieId;
+	movieId = Number(route.query.movieId);
 	movie.value = await getMovieById({movieId});
 
 	// get ratings
@@ -33,22 +37,70 @@ onMounted(async () => {
 });
 
 
-async function handleRating(event){
+async function handleRatingEvents(event){
 	const result = await handlers.handleRating(event);
 
 	if(!result.success){
-	    toast.add({ severity: 'error', summary: 'Error', detail: result.errors[0], life: 5000 });
+	    toast.add({ severity: 'error', summary: 'Error', detail: result.errors[0], group: "tl", life: 5000 });
 		return
 	}
 	   
-	toast.add({ severity: 'success', summary: 'Success', detail: 'Rating has been added.', life: 5000 });
+	toast.add({ severity: 'success', summary: 'Success', detail: 'Rating has been added.', group: "tl", life: 5000 });
 	ratings.value = await getRatings({movieId});
+	const foundMovie = movieStoreMovies.value.find(movie => movie.id === movieId)
+		.ratings = ratings.value;
 }
 
-async function handleWatchlist(event){
+async function handleWatchlistEvents(event){
 	const result = await handlers.handleWatchlist(event);
 
+	// update movie in movieStoreMovies
+	if(result === "movieAdded"){
+		movieStoreMovies.value.forEach(m => {
+			if(m.id === event.data.movieId){
+				m.isInWatchlist = true;
+			}
+		});
+	}
+	else if(result === "movieRemoved"){
+		movieStoreMovies.value.forEach(m => {
+			if(m.id === event.data.movieId){
+				m.isInWatchlist = false;
+			}
+		});
+	}
+
 	movie.value = await getMovieById({movieId});
+}
+
+async function handleMovielistEvents(event){
+	if(event.action === "create"){
+		const result = await createMovielistAPI({
+			movieId, 
+			movielistname: event.movielistname
+		});
+		
+		if(!result.success){
+			toast.add({ severity: 'error', summary: 'Error', detail: result.errors[0], life: 5000 });
+			return
+		}
+
+		toast.add({ severity: 'success', summary: 'Success', detail: 'Movielist has been created.', life: 5000 });
+	}
+
+	if(event.action === "addMovie"){
+		const result = await addMovieToMovielistAPI({
+			movielistId: event.movielistId,
+			movieId,
+		});
+		
+		if(!result.success){
+			toast.add({ severity: 'error', summary: 'Error', detail: result.errors[0], group: "tl", life: 5000 });
+			return
+		}
+
+	    toast.add({ severity: 'success', summary: 'Success', detail: "Movie has been added.", group: "tl", life: 5000 });
+	}
 }
 
 </script>
@@ -83,9 +135,11 @@ async function handleWatchlist(event){
 				<div class="movie-presentation__add-buttons">
 					<AddToWatchlistButton 
 						:movie="movie" 
-						@addToWatchlistButton:action="handleWatchlist"
+						@addToWatchlistButton:action="handleWatchlistEvents"
 					/>
-					<AddToMovielistMenu />
+					<AddToMovielistMenu 
+						@addToMovielistMenu:action="handleMovielistEvents"
+					/>
 				</div>
 
 				<div class="movie-presentation__ratings">
@@ -111,7 +165,7 @@ async function handleWatchlist(event){
 
 					<CreateRating 
 						class="movie-presentation__create-rating"
-						@createRating:action="handleRating"
+						@createRating:action="handleRatingEvents"
 					/>
 				</div>
 			</div>

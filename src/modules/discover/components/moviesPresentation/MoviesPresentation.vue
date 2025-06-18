@@ -1,10 +1,10 @@
 <script setup>
 import {useRouter} from "vue-router";
-import useMovieStore from "../../stores/movieStore.js";
+import useDiscoverMovieStore from "@/stores/useDiscoverMovieStore.js";
 import MovieCard from "@/components/movieCard/MovieCard.vue";
 
 
-const {movieStoreMovies, movieStoreMetaData} = useMovieStore();
+const {movieStoreCurrMovies, movieStoreMetaData} = useDiscoverMovieStore();
 const router = useRouter();
 
 
@@ -18,7 +18,7 @@ function openCard(movieId){
 <template>    
 	<div class="movies-presentation">
 		<MovieCard
-			v-for="(movie, index) in movieStoreMovies"
+			v-for="(movie, index) in movieStoreCurrMovies"
 			:key="index"
 			:movie="movie"
 			@click="openCard(movie.id)"
@@ -31,7 +31,7 @@ function openCard(movieId){
 .movies-presentation {
 	width: 100%;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
 	justify-content: center;
 	column-gap: 1rem;
 	row-gap: 1rem;

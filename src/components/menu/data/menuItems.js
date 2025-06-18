@@ -12,7 +12,7 @@ export default ref([
 	},
 	{
 		label: "Movielists",
-		url: "/watchlist",
+		url: "/movielists",
 	},
 	{
 		label: "Watchlist",
