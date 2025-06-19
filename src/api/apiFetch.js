@@ -9,6 +9,8 @@ export default async function apiFetch({path, options, addJwt = false}){
 		options.headers.authorization = user.jwt;
 	}
 
+	console.log(`${import.meta.env.VITE_API_URL}${path}`);
+
 	try{
 		const response = await fetch(`${import.meta.env.VITE_API_URL}${path}`, options);
 		const result = await response.json();
