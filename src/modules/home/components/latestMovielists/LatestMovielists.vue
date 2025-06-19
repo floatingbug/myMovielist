@@ -20,7 +20,7 @@ onMounted(async () => {
 
 	// get movielists based on ids in movielist.movies
 	const promises = fetchedMovielists.data.map(movielist => {
-		const movieIds = movielist.movies.map(movie => movie.movieId);
+		const movieIds = movielist.movies;
 
 		return getMoviesAPI({movieIds});
 	});
