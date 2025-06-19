@@ -37,10 +37,6 @@ onMounted(async () => {
 });
 
 
-function openMovie(movieId){
-	router.push(`movie-presentation?movieId=${movieId}`);
-}
-
 </script>
 
 
@@ -68,7 +64,6 @@ function openMovie(movieId){
 			<div 
 				class="movie"
 				v-for="(movie, index) in movielist.movies"
-				@click="openMovie(movie.id)"
 			>
 				<div class="movie-head">
 					<div class="movie-cover">
@@ -132,7 +127,6 @@ function openMovie(movieId){
 			flex-direction: column;
 			align-items: center;
 			border-radius: 8px;
-			cursor: pointer;
 			border: 1px solid var(--card-border-color-light);
 			background-color: var(--card-bg-glass);
 			transition: transform 250ms;
@@ -178,10 +172,6 @@ function openMovie(movieId){
 				}
 			}
 		}
-	}
-
-	.movie:hover {
-		transform: scale(1.1, 1.1);
 	}
 
 	.open-movielist-indicator {

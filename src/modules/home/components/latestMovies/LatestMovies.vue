@@ -40,17 +40,13 @@ onMounted(async () => {
 	window.dispatchEvent(new Event('resize'));
 });
 
-
-function openMovie(movieId){
-	router.push(`movie-presentation?movieId=${movieId}`);
-}
 </script>
 
 
 <template>    
 	<Carousel :value="movies" :numVisible="3" :numScroll="1" :responsiveOptions="responsiveOptions">
 		<template #item="slotProps">
-				<div class="movie-card" @click="openMovie(slotProps.data.id)">
+				<div class="movie-card">
 					<div class="cover">
 						<img :src="`https://image.tmdb.org/t/p/original/${slotProps.data.poster_path}`" alt="">
 					</div>
@@ -65,7 +61,6 @@ function openMovie(movieId){
 	width: 100%;
 	height: 100%;
 	padding: 1rem;
-	cursor: pointer;
 	transition: transform 250ms;
 
 	.cover {
@@ -78,9 +73,5 @@ function openMovie(movieId){
 			height: 100%;
 		}
 	}
-}
-
-.movie-card:hover {
-	transform: scale(1.1, 1.1);
 }
 </style>
