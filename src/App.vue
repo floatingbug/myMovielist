@@ -24,6 +24,13 @@ onMounted(async () => {
 		
 		//if test user is signed in skip
 		if(jwt === "1" || jwt === "2"){
+			setUser({
+				userId: jwt,
+				name: jwt === "1" ? "user" : "user2",
+				jwt,
+				isSignedIn: true,
+			});
+			
 			return isInitialized.value = true;
 		}
 
