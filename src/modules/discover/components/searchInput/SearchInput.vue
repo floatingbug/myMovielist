@@ -42,7 +42,7 @@ async function findMoviesByName(){
 		<FloatLabel>
 			<InputText v-model="nameInput">
 			</InputText>
-			<label for="search">Search by Actor</label>
+			<label for="search">Search by Actor, Author...</label>
 		</FloatLabel>
 		
 		<InputGroupAddon class="button-search-wrapper">
