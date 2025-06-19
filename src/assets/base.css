@@ -1,30 +1,22 @@
-/* color palette from <https://github.com/vuejs/theme> */
 :root {
-	--navbar-bg: var(--p-primary-color);
-	--text-color: var(--p-primary-950);
 	--text-color-dark: black;
 	--text-color-light: white;
-}
+	--text-color: var(--p-primary-50);
+	--navbar-bg: rgb(from var(--p-surface-800) r g b / 80%);
+	--navbar-border-color: rgb(from var(--p-primary-color) r g b / 40%);
+	--p-primary-color: var(--p-primary-400) !important;
+	--contrast-color: var(--p-sky-400);
+	--background-color: rgb(from var(--p-primary-950) r g b / 10%);
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--text-color: var(--p-primary-50);
-		--navbar-bg: rgb(from var(--p-surface-800) r g b / 80%);
-		--navbar-border-color: rgb(from var(--p-primary-color) r g b / 40%);
-		--p-primary-color: var(--p-primary-400) !important;
-		--contrast-color: var(--p-sky-400);
-		--background-color: rgb(from var(--p-primary-950) r g b / 10%);
-
-		--card-bg-glass: rgb(from var(--p-surface-500) r g b / 20%);
-		--movie-card-head-bg: rgb(from var(--p-surface-900) r g b / 80%);
-		--movie-card-footer-bg: rgb(from var(--p-surface-900) r g b / 80%);
-		--card-border-color: rgb(from var(--p-primary-300) r g b / 80%);
-		--card-border-color-light: rgb(from var(--p-primary-300) r g b / 50%);
-		
-		--surface-1: rgb(from var(--p-surface-900) r g b / 80%);
-		--table-head-bg-glass : rgb(from var(--p-surface-800) r g b / 80%);
-		--table-content-bg-glass : rgb(from var(--p-surface-700) r g b / 20%);
-	}
+	--card-bg-glass: rgb(from var(--p-surface-500) r g b / 20%);
+	--movie-card-head-bg: rgb(from var(--p-surface-900) r g b / 80%);
+	--movie-card-footer-bg: rgb(from var(--p-surface-900) r g b / 80%);
+	--card-border-color: rgb(from var(--p-primary-300) r g b / 80%);
+	--card-border-color-light: rgb(from var(--p-primary-300) r g b / 50%);
+	
+	--surface-1: rgb(from var(--p-surface-900) r g b / 80%);
+	--table-head-bg-glass : rgb(from var(--p-surface-800) r g b / 80%);
+	--table-content-bg-glass : rgb(from var(--p-surface-700) r g b / 20%);
 }
 
 body {
