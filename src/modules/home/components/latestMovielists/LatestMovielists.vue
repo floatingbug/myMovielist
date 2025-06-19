@@ -20,7 +20,8 @@ onMounted(async () => {
 
 	// get movielists based on ids in movielist.movies
 	const promises = latestMovielists.value.map(movielist => {
-		return getMoviesAPI({movieIds: toRaw(movielist.movies)});
+		const movieIds = toRaw(movielist.movies);
+		return getMoviesAPI({movieIds});
 	});
 	const responseArray = await Promise.all(promises);
 
