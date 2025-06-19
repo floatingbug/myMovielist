@@ -1,5 +1,5 @@
 <script setup>
-import {ref, onMounted} from "vue";
+import {ref, onMounted, toRaw} from "vue";
 import {useRouter} from "vue-router";
 import getLatestMovielistsAPI from "./api/getLatestMovielistsAPI.js";
 import getMoviesAPI from "./api/getMoviesAPI.js";
@@ -20,7 +20,7 @@ onMounted(async () => {
 
 	// get movielists based on ids in movielist.movies
 	const promises = latestMovielists.value.map(movielist => {
-		return getMoviesAPI({movieIds: movielist.movies});
+		return getMoviesAPI({movieIds: toRaw(movielist.movies)});
 	});
 	const responseArray = await Promise.all(promises);
 
