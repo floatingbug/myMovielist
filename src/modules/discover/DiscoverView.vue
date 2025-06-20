@@ -34,6 +34,7 @@ onMounted(async () => {
 
 async function changePage(event){
 	systemStatus.value.isLoading = true;
+	movieStoreCurrMovies.value = [];
 
 	if(movieStoreMovies.value.length > 20){
 		const start = (event.data.page - 1) * 20;

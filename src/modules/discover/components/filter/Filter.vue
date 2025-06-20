@@ -27,6 +27,7 @@ function handleFilterEvents(event){
 
 async function applyFilter(){
 	systemStatus.value.isLoading = true;
+	movieStoreCurrMovies.value = [];
 
 	const query = createQuery({filterObj});
 

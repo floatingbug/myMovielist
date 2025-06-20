@@ -26,6 +26,8 @@ let movieId = 0;
 
 
 onMounted(async () => {
+	 window.scrollTo({ top: 0, behavior: 'smooth' });
+
 	// get movie
 	movieId = Number(route.query.movieId);
 	movie.value = await getMovieById({movieId});
