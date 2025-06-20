@@ -64,6 +64,7 @@ onMounted(async () => {
 			<div 
 				class="movie"
 				v-for="(movie, index) in movielist.movies"
+				@click="router.push(`/movie-presentation?movieId=${movie.id}`)"
 			>
 				<div class="movie-head">
 					<div class="movie-cover">

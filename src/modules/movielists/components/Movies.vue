@@ -17,8 +17,6 @@ const props = defineProps({
 const {device} = useDevice();
 const movies = ref([]);
 
-console.log(props.isOwnMovielist);
-
 
 onMounted(async () => {
 	systemStatus.value.isLoading = true;

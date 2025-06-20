@@ -46,6 +46,7 @@ function toggle(event){
 	<Button 
 		icon="pi pi-ellipsis-v"
 		size="small"
+		severity="secondary"
 		@click="toggle" 
 	/>
 	<TieredMenu ref="menu" :model="items" popup />

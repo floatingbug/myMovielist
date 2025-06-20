@@ -2,6 +2,10 @@
 import systemStatus from "@/composables/systemStatus.js";
 import LatestMovielists from "./components/latestMovielists/LatestMovielists.vue";
 import LatestMovies from "./components/latestMovies/LatestMovies.vue";
+import useUserStore from "@/stores/userStore.js";
+
+
+const {user} = useUserStore();
 
 
 </script>
@@ -9,29 +13,33 @@ import LatestMovies from "./components/latestMovies/LatestMovies.vue";
 
 <template>    
 	<div class="layout">
-		<section class="welcome">
-			<h1>Welcome.</h1>
-			
-			<div class="introduction">
-				<p>Discover movies and save them to your created movie lists, choosing whether they are private or public.</p>
-			</div>
-		</section>
+		<div class="not-signed-in" v-if="!user.isSignedIn">
+			<section class="welcome">
+				<h1>Welcome.</h1>
+				
+				<div class="introduction">
+					<p>Discover movies and save them to your created movie lists, choosing whether they are private or public.</p>
+				</div>
+			</section>
+		</div>
 		
-		<section class="latest-movielists">
-			<h2>Latest Movielists</h2>
-
-			<div class="movielists-container">
-				<LatestMovielists />
-			</div>
-		</section>
-
-		<section class="latest-movies">
-			<h2>Latest Movies</h2>
-
-			<div class="movies-container">
-				<LatestMovies />
-			</div>
-		</section>
+		<div class="signed-in" v-if="user.isSignedIn">
+			<section class="latest-movielists">
+				<h2>Latest Movielists</h2>
+			
+				<div class="movielists-container">
+					<LatestMovielists />
+				</div>
+			</section>
+			
+			<section class="latest-movies">
+				<h2>Latest Movies</h2>
+			
+				<div class="movies-container">
+					<LatestMovies />
+				</div>
+			</section>
+		</div>
 	</div>
 </template>   
 
@@ -40,6 +48,10 @@ import LatestMovies from "./components/latestMovies/LatestMovies.vue";
 section {
 	width: 90%;
 	min-width: 300px;
+}
+
+.signed-in, .not-signed-in {
+	width: 100%;
 }
 
 .welcome {

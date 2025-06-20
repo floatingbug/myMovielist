@@ -8,7 +8,7 @@
 	--navbar-border-color: rgb(from var(--p-primary-color) r g b / 40%);
 	--p-primary-color: var(--p-primary-400) !important;
 	--contrast-color: var(--p-sky-400);
-	--background-color: rgb(from var(--p-primary-950) r g b / 10%);
+	--background-color: #16111a;
 
 	--card-bg-glass: rgb(from var(--p-surface-500) r g b / 20%);
 	--movie-card-head-bg: rgb(from var(--p-surface-900) r g b / 80%);

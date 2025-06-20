@@ -22,7 +22,6 @@ const {user} = useUser();
 const {movielists} = useMovielistStore();
 const isListOpen = ref(null);
 const isOwnMovielist = user.userId === props.movielist.userId ? true : false;
-console.log(props.movielist);
 
 
 watch(() => props.listNumber, () => {
@@ -81,7 +80,7 @@ async function onMovielistMenuAction(event){
 			:value="'List by: ' + movielist.creatorName"
 		/>
 
-		<div class="movielist__head">
+		<div class="movielist__head" :class="isListOpen ? 'movielist__head-is-open' : ''">
 			<div class="movielist__head-menu" v-if="isListOpen">
 				<MovielistMenu 
 					v-if="user.userId === movielist.userId"
@@ -94,7 +93,7 @@ async function onMovielistMenuAction(event){
 					<Button
 						icon="pi pi-times"
 						size="small"
-						severity="warn"
+						severity="secondary"
 						rounded
 						@click="emitCloseList"
 					/>
@@ -110,6 +109,10 @@ async function onMovielistMenuAction(event){
 					<span>Title: </span>{{movielist.movielistname}}
 				</div>
 			</div>
+
+			<div class="movielist__head-open-indicator" v-if="!isListOpen">
+				<i class="pi pi-arrow-down"></i>
+			</div>
 		</div>
 
 		<div class="movielist__main" :class="{'movielist__main-open': isListOpen}">
@@ -122,19 +125,28 @@ async function onMovielistMenuAction(event){
 <style scoped>
 .movielist__head {
 	width: 100%;
+	position: relative;
 	display: flex;
 	flex-direction: column;
-	border-radius: 8px 8px 0 0;
+	border-radius: 8px;
 	padding: 1rem;
 	border-bottom: 1px solid var(--head-gb-glass);
 	cursor: pointer;
 	user-select: none;
 	background-color: var(--table-head-bg-glass);
+	transition: border-radius 250ms, transform 250ms;
+}
+
+.movielist__head-is-open {
+	border-radius: 8px 8px 0 0;
 }
 
 .movielist__head-menu {
 	display: flex;
-	justify-content: space-between;
+
+	.movielist__head-close {
+		margin-left: auto;
+	}
 }
 
 .movielist__head-items {
@@ -151,6 +163,21 @@ async function onMovielistMenuAction(event){
 	:first-child {
 		color: var(--contrast-color);
 	}
+}
+
+.movielist__head-open-indicator {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%, 50%);
+	padding: 0.4rem;
+	border-radius: 8px 8px 0 0;
+	background-color: var(--background-color);
+	transition: transform 250ms;
+}
+
+.movielist__head:hover .movielist__head-open-indicator {
+	transform: scale(1.1, 1.1) translateX(-50%);
 }
 
 .movielist__main {
