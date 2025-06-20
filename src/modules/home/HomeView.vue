@@ -24,6 +24,8 @@ const {user} = useUserStore();
 		</div>
 		
 		<div class="signed-in" v-if="user.isSignedIn">
+			<h1>Dashboard</h1>
+
 			<section class="latest-movielists">
 				<h2>Latest Movielists</h2>
 			
@@ -52,6 +54,11 @@ section {
 
 .signed-in, .not-signed-in {
 	width: 100%;
+	max-width: 1400px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
 }
 
 .welcome {
@@ -69,6 +76,10 @@ section {
 }
 
 .latest-movielists{
+	border: 1px solid var(--card-border-color-light);
+	background-color: var(--surface-purple);
+	border-radius: 8px;
+	padding: 2rem 0;
 
 	h2 {
 		text-align: center;
@@ -89,6 +100,10 @@ section {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	border: 1px solid var(--card-border-color-light);
+	background-color: var(--surface-purple);
+	border-radius: 8px;
+	padding: 2rem 0;
 
 	h2 {
 		text-align: center;

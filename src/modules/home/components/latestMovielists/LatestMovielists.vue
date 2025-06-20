@@ -18,6 +18,11 @@ onMounted(async () => {
 	const fetchedMovielists = await getLatestMovielistsAPI();
 	latestMovielists.value = fetchedMovielists.data;
 
+	// max 4 movielists
+	if(latestMovielists.value.length > 4){
+		latestMovielists.value = latestMovielists.value.slice(0, 4);
+	}
+
 	// get movielists based on ids in movielist.movies
 	const promises = fetchedMovielists.data.map(movielist => {
 		const movieIds = movielist.movies;
@@ -48,11 +53,13 @@ onMounted(async () => {
 	>
 		<div class="head">
 			<div class="creator">
-				<span>Creator: </span>{{movielist.creatorName}}
+				<span>Creator: </span>
+				<span>{{movielist.creatorName}}</span>
 			</div>
 
 			<div class="title">
-				<span>Title: </span>{{movielist.movielistname}}
+				<span>Title: </span>
+				<span>{{movielist.movielistname}}</span>
 			</div>
 
 			<div class="open-movielist-indicator">
@@ -100,7 +107,7 @@ onMounted(async () => {
 	.head {
 		position: relative;
 		display: flex;
-		gap: 4rem;
+		justify-content: space-between;
 		padding: 1rem;
 		border-radius: 8px 8px 0 0;
 		background-color: var(--table-head-bg-glass);
@@ -108,6 +115,10 @@ onMounted(async () => {
 		.creator, .title {
 			display: flex;
 			gap: 0.3rem;
+
+			:first-child {
+				color: var(--p-primary-color);
+			}
 		}
 	}
 
@@ -128,6 +139,7 @@ onMounted(async () => {
 			flex-direction: column;
 			align-items: center;
 			border-radius: 8px;
+			cursor: pointer;
 			border: 1px solid var(--card-border-color-light);
 			background-color: var(--card-bg-glass);
 			transition: transform 250ms;
@@ -172,6 +184,10 @@ onMounted(async () => {
 				.release-date {
 				}
 			}
+		}
+
+		.movie:hover {
+			transform: scale(1.05, 1.05);
 		}
 	}
 

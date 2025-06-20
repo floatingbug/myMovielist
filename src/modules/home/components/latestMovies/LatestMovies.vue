@@ -15,8 +15,8 @@ const responsiveOptions = ref([
     },
     {
         breakpoint: '1199px',
-        numVisible: 5,
-        numScroll: 5
+        numVisible: 3,
+        numScroll: 3
     },
     {
         breakpoint: '480px',
@@ -46,7 +46,7 @@ onMounted(async () => {
 <template>    
 	<Carousel :value="movies" :numVisible="3" :numScroll="1" :responsiveOptions="responsiveOptions">
 		<template #item="slotProps">
-				<div class="movie-card">
+			<div class="movie-card" @click="router.push(`/movie-presentation?movieId=${slotProps.data.id}`)">
 					<div class="cover">
 						<img :src="`https://image.tmdb.org/t/p/original/${slotProps.data.poster_path}`" alt="">
 					</div>
@@ -61,6 +61,7 @@ onMounted(async () => {
 	width: 100%;
 	height: 100%;
 	padding: 1rem;
+	cursor: pointer;
 	transition: transform 250ms;
 
 	.cover {
@@ -73,5 +74,9 @@ onMounted(async () => {
 			height: 100%;
 		}
 	}
+}
+
+.movie-card:hover {
+	transform: scale(1.05, 1.05);
 }
 </style>

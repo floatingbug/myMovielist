@@ -17,6 +17,7 @@
 	--card-border-color-light: rgb(from var(--p-primary-300) r g b / 50%);
 	
 	--surface-1: rgb(from var(--p-surface-900) r g b / 80%);
+	--surface-purple: rgb(from var(--p-purple-300) r g b / 30%);
 	--table-head-bg-glass : rgb(from var(--p-surface-800) r g b / 80%);
 	--table-content-bg-glass : rgb(from var(--p-surface-700) r g b / 20%);
 }
