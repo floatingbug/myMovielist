@@ -1,5 +1,6 @@
 <script setup>
 import {ref} from "vue";
+import {useRouter} from "vue-router";
 import menuItems from "./data/menuItems.js";
 import useUser from "@/stores/userStore.js";
 import MenuButton from "./components/MenuButton.vue";
@@ -9,6 +10,7 @@ import useDevice from "@/composables/useDevice.js";
 
 const {user} = useUser();
 const {device} = useDevice();
+const router = useRouter();
 const isMenuOpen = ref(false);
 
 
@@ -78,7 +80,7 @@ function closeMenu(event){
 		class="menu__content-not-signed-in"
 		v-if="!user.isSignedIn" 
 	>
-		<div class="menu__logo">
+		<div class="menu__logo" @click="router.push('/');">
 			myMovielist
 		</div>
 
@@ -94,6 +96,8 @@ function closeMenu(event){
 			<Button
 				as="router-link"
 				to="/auth/sign-up"
+				variant="outlined"
+				severity="info"
 			>
 				Sign up
 			</Button>
@@ -157,6 +161,7 @@ function closeMenu(event){
 
 .menu__logo {
 	font-size: 1.8rem;
+	color: var(--contrast-color);
 }
 
 .menu__bars-button {

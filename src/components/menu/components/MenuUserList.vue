@@ -32,11 +32,13 @@ function toggle(event){
 <template>    
 	<Button 
 		class="menu__user-button"
+		variant="text"
 		rounded
 		@click="toggle"
 	>
 		<i 
 			class="pi pi-user"
+			style="font-size: 1.6rem"
 		/>
 	</Button>
 

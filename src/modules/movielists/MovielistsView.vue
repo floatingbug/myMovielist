@@ -68,11 +68,17 @@ async function onMovielistAction(event){
 <style scoped>
 .movielists {
 	width: 100%;
-	display: flex;
+	max-width: 1400px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	justify-content: center;
+	justify-items: center;
 	gap: 2rem;
-	flex-wrap: wrap;
 	margin-top: 3rem;
+	padding: 2rem 0;
+	border-radius: 8px;
+	border: 1px solid var(--card-border-color-ultralight);
+	background-color: var(--surface-purple);
 }
 
 .movielist {

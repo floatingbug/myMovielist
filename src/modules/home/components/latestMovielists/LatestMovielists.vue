@@ -199,7 +199,7 @@ onMounted(async () => {
 		padding: 0.3rem;
 		border-radius: 30px;
 		background-color: var(--surface-1);
-		z-index: 1000;
+		z-index: 900;
 
 		i {
 			color: var(--contrast-color);

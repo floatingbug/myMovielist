@@ -85,7 +85,7 @@ async function signUp(){
 			<Button
 				@click="signUp"
 			>
-				Sign in
+				Sign up
 			</Button>
 		</template>
 	</AuthLayout>

@@ -3,7 +3,7 @@ import {ref} from "vue";
 
 export default ref([
 	{
-		label: "Home",
+		label: "Dashboard",
 		url: "/",
 	},
 	{

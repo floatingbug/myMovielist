@@ -11,6 +11,7 @@ const props = defineProps({
 	<Button
 		as="router-link"
 		:to="url"
+		variant="text"
 		raised
 	>
 		{{label}}
